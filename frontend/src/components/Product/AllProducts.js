@@ -1,0 +1,137 @@
+import React, { useEffect, useState } from "react";
+import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../../actions/productAction.js";
+import Loader from "../layout/Loader.js";
+import ProductSearch from "./ProductSearch.js";
+import { useParams,useNavigate } from "react-router-dom";
+import Product from "../Home/product.js"
+import Typography from '@material-ui/core/Typography'; 
+import Slider from '@material-ui/core/Slider'; 
+
+const AllProducts = () => {
+  const { keyword } = useParams();
+  const dispatch = useDispatch();
+  const [selectedPageIndex, setSelectedPageIndex] = useState(null);
+  const [currentPage,setCurrentPage] = useState(1);
+  const [price,setPrice] = useState([0,25000]);
+  const [sizeOfWindow,setSizeOfWindow] = useState(window.innerWidth);
+
+  const fixingWindowSize= () => setSizeOfWindow(window.innerWidth);
+
+useEffect(() => {
+  window.addEventListener("resize", fixingWindowSize);
+  return () => {
+    window.removeEventListener("resize", fixingWindowSize);
+  };
+}, []);
+
+  const { loading,products, productCount, resultperPage } = useSelector((state) => state.products);
+  const numberOfPages = (productCount && resultperPage) ? Math.floor(productCount / resultperPage) + 1 : 1;
+
+  
+  useEffect(() => {
+    dispatch(getProduct(keyword,currentPage,price));
+  }, [dispatch, keyword,currentPage,price]);
+
+
+  const customPagination = {
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
+    margin: "20px",
+  };
+  
+  
+
+  const handleMouse = (index) => {
+    setSelectedPageIndex(index);
+  };
+  const handlePage= (index) => {
+    setCurrentPage(index);
+  }
+  const handlePrice = (event,newPrice) => {
+    setPrice(newPrice);
+    
+  }
+
+  const paginationBox = (index) => ({
+    backgroundColor: selectedPageIndex === index ? "blue" : "white",
+    color: "black",
+    height: "40px",
+    maxWidth: "40px",
+    padding: "5px",
+    border: "2px black solid",
+    margin: "5px",
+  });
+
+  const customStyleofRow = {
+    alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
+    backgroundColor: "#574c94"
+};
+const customSearch = {
+  alignItems:"center",
+  justifyContent:"center",
+  display:sizeOfWindow>600 ? "flex" : "",
+}
+  return (
+    <Row>
+      <div style={{ height: "100px" }}></div>
+      <div style={customSearch}>
+        <div style={{color:"white",width:"250px",margin:"60px"}}>
+          <Typography>Filter product by price </Typography>
+        <Slider
+          color="primary"
+          value={price}
+          onChange={handlePrice}
+          valueLabelDisplay="auto"
+          min={0}
+          max={25000}
+      />
+      <h4>Min Price:{price[0]}</h4>
+      <h4>Max Price:{price[1]}</h4>
+        </div>
+        <ProductSearch />
+
+      </div>
+      <Row style={customStyleofRow}>
+        {!loading ? (
+          products.length? (
+          products.map((product, index) => (
+            <Col key={product._id}>
+              <Link to={`/product/${product._id}`}>
+                 <Product
+                    key={product._id} // Assuming each product has a unique identifier
+                    P_id={product._id}
+                    name={product.name}
+                    price={product.price}
+                    description={product.description}
+                    image={product.images}
+                    rating={product.rating}
+                    reviewCount={product.reviews.length}
+                   />
+              </Link>
+            </Col>
+          ))) : (
+            <h2>No product found</h2>
+          )
+        ) : (
+          <Loader />
+        )}
+      </Row>
+      <Row style={customPagination}>
+        {[...Array(numberOfPages)].map((_, index) => (
+
+          <Col onClick={()=> handlePage(index+1)} key={index} onMouseOver={() => handleMouse(index)} style={paginationBox(index)}>
+            {index+1}
+          </Col>
+        ))}
+      </Row>
+    </Row>
+  );
+};
+
+export default AllProducts;

@@ -1,0 +1,99 @@
+body {
+  background-color: #6e8ba8; 
+  margin: 0; 
+  font-family: 'Times New Roman', Times, serif;
+  color: white;
+}
+header{
+  display: flex;
+  position:fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 80px;
+  background-color: #352978;
+  
+}
+.user-profile{
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+}
+.company-name{
+  padding-top: 19px;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 20px;
+  font-size: 2,3rem;
+  flex-grow: 1;
+}
+.company-name-link {
+  color: white;
+  text-decoration: none;
+}
+.company-navbar{
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+  padding: 0 1rem;
+}
+nav a{
+  margin: 0 1rem;
+  color:rgb(228, 217, 219);
+  text-decoration:none;
+}
+nav a:hover{
+  color:aqua;
+}
+
+header .nav-btn{
+  padding: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  color: antiquewhite;
+  background: transparent;
+  visibility: hidden;
+  opacity: 0;
+  font-size: 1.5rem;
+
+}
+
+
+
+  
+ @media only screen and (max-width:800px) {
+  header .nav-btn{
+    visibility: visible;
+    opacity: 1;
+  }
+  header .search-container{
+    visibility: hidden;
+  }
+  header nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    gap: 1.5rem;
+    background-color: #2f5b86;
+    transition: 1.3s;
+    transform: translateY(-100vh);
+  }
+  header .responsive_nav {
+    transform: none;
+  }
+
+  nav .nav-close-btn {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+  nav a{
+    font-size: 1.5rem;
+  }
+ }

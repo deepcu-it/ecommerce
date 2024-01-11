@@ -1,0 +1,162 @@
+.playstore-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border:2px solid black;
+    border-radius: 99px;
+    background-color:#000000;
+    padding: 0.4rem 0.4rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 1);
+    outline: 0;
+    transition: all  .2s ease;
+    text-decoration: none;
+  }
+  
+  .playstore-button:hover {
+    background-color: transparent;
+    color: rgb(11, 24, 65);
+  }
+  
+  .icon {
+    height: 1.0rem;
+    width: 1.0rem;
+  }
+  
+  .texts {
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1;
+  }
+  
+  .text-1 {
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+  
+  .text-2 {
+    font-weight: 600;
+  }
+  footer{
+    background-color: #352978;
+    display: flex;
+    flex-direction: column;
+    color: rgb(248, 255, 237);
+    width: 100%;
+    bottom: 0;
+  }
+  .footer-down{
+    background-color: #352978;
+    display: flex;
+    color: rgb(248, 255, 237);
+    justify-content: space-around;
+    align-items: center;
+  }
+  .footer-down >div {
+    margin: 3%;
+  }
+  .footer-right{
+    display: flex;
+    flex-direction: column;
+  }
+  .footer-right a{
+    padding: 5px;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+  }
+  .footer-up{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-follow{
+    font-size: large;
+    color: white;
+  }
+  .card {
+    width: fit-content;
+    height: fit-content;
+    background-color: #352978;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 25px;
+    gap: 20px;
+  }
+  
+  /* for all social containers*/
+  .socialContainer {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background-color: rgb(44, 44, 44);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: .3s;
+  }
+  /* instagram*/
+  .containerOne:hover {
+    background-color: #d62976;
+    transition-duration: .3s;
+  }
+  /* twitter*/
+  .containerTwo:hover {
+    background-color: #00acee;
+    transition-duration: .3s;
+  }
+  /* linkdin*/
+  .containerThree:hover {
+    background-color: #0072b1;
+    transition-duration: .3s;
+  }
+  /* Whatsapp*/
+  .containerFour:hover {
+    background-color: #128C7E;
+    transition-duration: .3s;
+  }
+  
+  .socialContainer:active {
+    transform: scale(0.9);
+    transition-duration: .3s;
+  }
+  
+  .socialSvg {
+    width: 17px;
+  }
+  
+  .socialSvg path {
+    fill: rgb(255, 255, 255);
+  }
+  
+  .socialContainer:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+  }
+  @media (max-width:800px) {
+    .footer-down{
+      display:flex;
+      flex-direction: column;
+    }
+  }
+  
+  @keyframes slide-in-top {
+    0% {
+      transform: translateY(-50px);
+      opacity: 0;
+    }
+  
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  
+  
+  

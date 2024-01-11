@@ -1,0 +1,15 @@
+.noReviews {
+    text-align: center;
+}
+.product-review {
+    padding: 50px 60px 20px 60px;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    text-align: justify;
+}
+.product-review-image {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
