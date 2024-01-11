@@ -45,7 +45,7 @@ const Login = () => {
             </div>
             <div><a className="forgot-password" href="/forgot/password">forgot password</a></div>
             <button type="submit" class="submit">
-            <span class="sign-text">Sign in </span>
+            <span class="sign-text">Sign in</span>
             </button>
 
             <p class="signup-link">
