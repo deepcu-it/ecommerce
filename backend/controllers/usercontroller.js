@@ -7,10 +7,7 @@ import crypto from "crypto"
 //Register a user 
 
 const RegisteredUser = catchmyerror(async (req,res,next) => {
- 
-
     const {name,phoneNo,email,password} = req.body;
-
     const user= await User.create({
         name,
         phoneNo,

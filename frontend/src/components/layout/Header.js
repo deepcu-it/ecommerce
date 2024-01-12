@@ -2,11 +2,25 @@ import React,{ useRef,useState,useEffect} from "react";
 import {FaBars,FaTimes} from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
-function Header(params) {
+import { useDispatch,useSelector } from "react-redux";
+import { logoutUser } from "../../actions/userAction.js";
+import {notify, ToastContainer} from "../notification.js";
+import {useNavigate} from "react-router-dom";
+
+function Header() {
   const navref=useRef();
+  const dispatch = useDispatch();
+  const navigate =  useNavigate();
   const showNavbar =()=>{
     navref.current.classList.toggle("responsive_nav");
+  }
+  const logoutSubmit = ()=> {
+    dispatch(logoutUser());
+    notify("logged out successfully");
+    navigate("/");
+  }
+  const gotoLogin= () => {
+    navigate("/login");
   }
   const customDownLine = {
     height:"30px",
@@ -28,8 +42,8 @@ function Header(params) {
               <a href="/" >Home<span><RiArrowDropDownLine style={customDownLine}/></span></a>
               <a href="/products" >Products <span><RiArrowDropDownLine style={customDownLine}/></span></a>
               <a href="/about" >About Us <span><RiArrowDropDownLine style={customDownLine}/></span></a>
-              <a href="/login">{loginToggle}<span><TbLogout style={{height:"23px",width:"27px"}}/></span></a>
-              <a href="/me"><img src="" className="user-profile"/></a>
+              <a onClick={isAuthenticated ? logoutSubmit :gotoLogin}>{loginToggle}<span><TbLogout style={{cursor:"pointer",height:"23px",width:"27px"}}/></span></a>
+              <a href="/account"><img src="" className="user-profile"/></a>
             
               <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                 <FaTimes/>
@@ -40,6 +54,7 @@ function Header(params) {
           </button>
         </div>
         </header>
+        <ToastContainer/>
       </React.Fragment>
     );
 }

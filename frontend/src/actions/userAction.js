@@ -7,9 +7,11 @@ import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   CLEAR_ERROR,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAIL,
 } from "../consents/userConsent.js";
 
-export const getUserDetails = (id) => async (dispatch) => {
+export const getUserDetails = () => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_USER_REQUEST });
     const { data } = await axios.get(`/api/v1/me`);
@@ -25,6 +27,22 @@ export const getUserDetails = (id) => async (dispatch) => {
 
     dispatch({
       type: LOGIN_USER_FAIL,
+      payload: errorMessage,
+    });
+  }
+};
+export const logoutUser= () => async (dispatch) => {
+  try {
+    await axios.get(`/api/v1/Logout`);
+    dispatch({ type: LOGOUT_SUCCESS });
+  } catch (error) {
+    const errorMessage =
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : "An error occurred";
+
+    dispatch({
+      type: LOGOUT_FAIL,
       payload: errorMessage,
     });
   }

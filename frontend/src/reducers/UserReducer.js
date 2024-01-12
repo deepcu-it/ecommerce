@@ -4,6 +4,8 @@ import { USER_FAIL,
      LOGIN_USER_FAIL,
      LOGIN_USER_REQUEST,
      LOGIN_USER_SUCCESS,
+     LOGOUT_SUCCESS,
+     LOGOUT_FAIL,
      CLEAR_ERROR } from "../consents/userConsent";
 
 
@@ -24,6 +26,18 @@ export const getUser = (state={loading:true,user:{}},action) => {
             isAuthenticated :true,
             user:action.payload,
         }
+        case LOGOUT_SUCCESS:
+            return {
+                loading:false,
+                user:null,
+                isAuthenticated:false,
+            }
+        case LOGOUT_FAIL:
+            return {
+                ...state,
+                loading:false,
+                error:action.payload,
+            }
         case USER_FAIL:
             return {   
                 ...state,

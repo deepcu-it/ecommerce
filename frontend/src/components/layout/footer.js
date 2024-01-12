@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 function Footer() {
     const d=new Date();
     const year=d.getFullYear();
-    const {loading,error,user,isAuthenticated} = useSelector((state)=> state.user);
-    const [loginToggle,setLoginToggle ]= useState("logout");
+    const {isAuthenticated} = useSelector((state)=> state.user);
+    const [loginToggle,setLoginToggle ]= useState("login");
     useEffect(()=>{
-      if(isAuthenticated) setLoginToggle("Login");
+      if(isAuthenticated) setLoginToggle("Logout");
     },[isAuthenticated]);
     return (
         <footer>
