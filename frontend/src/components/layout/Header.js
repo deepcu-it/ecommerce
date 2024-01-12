@@ -17,16 +17,17 @@ function Header() {
   const logoutSubmit = ()=> {
     dispatch(logoutUser());
     notify("logged out successfully");
-    navigate("/");
-  }
-  const gotoLogin= () => {
     navigate("/login");
   }
+  const gotoLogin = () => {
+    navigate("/login");
+  }
+
   const customDownLine = {
     height:"30px",
     width:"30px",
   }
-  const {loading,error,user,isAuthenticated} = useSelector((state)=> state.user);
+  const {isAuthenticated} = useSelector((state)=> state.user);
   const [loginToggle,setLoginToggle ]= useState("login");
   useEffect(()=>{
     if(isAuthenticated) setLoginToggle("logout");
@@ -42,7 +43,7 @@ function Header() {
               <a href="/" >Home<span><RiArrowDropDownLine style={customDownLine}/></span></a>
               <a href="/products" >Products <span><RiArrowDropDownLine style={customDownLine}/></span></a>
               <a href="/about" >About Us <span><RiArrowDropDownLine style={customDownLine}/></span></a>
-              <a onClick={isAuthenticated ? logoutSubmit :gotoLogin}>{loginToggle}<span><TbLogout style={{cursor:"pointer",height:"23px",width:"27px"}}/></span></a>
+              <a onClick={isAuthenticated ? logoutSubmit:gotoLogin}>{loginToggle}<span><TbLogout style={{cursor:"pointer",height:"23px",width:"27px"}}/></span></a>
               <a href="/account"><img src="" className="user-profile"/></a>
             
               <button className="nav-btn nav-close-btn" onClick={showNavbar}>

@@ -1,14 +1,9 @@
-import React , {useEffect,useState} from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 
 function Footer() {
     const d=new Date();
     const year=d.getFullYear();
-    const {isAuthenticated} = useSelector((state)=> state.user);
-    const [loginToggle,setLoginToggle ]= useState("login");
-    useEffect(()=>{
-      if(isAuthenticated) setLoginToggle("Logout");
-    },[isAuthenticated]);
+  
     return (
         <footer>
             <div className="footer-up">
@@ -84,7 +79,6 @@ function Footer() {
                 <a href="/Home" >Home</a>
                 <a href="/Products" >Products</a>
                 <a href="/About" >About Us</a>
-                <a href="/Login" >{loginToggle}</a>
             </div>
             </div>
         </footer>

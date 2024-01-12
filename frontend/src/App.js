@@ -12,6 +12,7 @@ import SignUp from './components/user/signup.js';
 import store from './store.js';
 import { getUserDetails } from './actions/userAction.js';
 import React from 'react';
+import UserProfile from './components/user/UserProfile.js';
 function App() {
   React.useEffect(()=>{
     store.dispatch(getUserDetails());
@@ -26,6 +27,7 @@ function App() {
         <Route path="/products/:keyword" element={<AllProducts/>} />
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<SignUp/>}/>
+        <Route exact path="/account" element={<UserProfile/>}/>
       </Routes>
       <Footer />
     </Router>

@@ -1,0 +1,17 @@
+.user-image{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    margin: 50px;
+}
+.page-title {
+    text-align: center;
+    justify-content: center;
+}
+
+.user{
+    padding:15px;
+    display: flex;
+    font-size:1.6rem;
+    gap:10px;
+}
