@@ -6,6 +6,10 @@ import { USER_FAIL,
      LOGIN_USER_SUCCESS,
      LOGOUT_SUCCESS,
      LOGOUT_FAIL,
+     UPDATE_USER_FAIL,
+     UPDATE_USER_REQUEST,
+     UPDATE_USER_RESET,
+     UPDATE_USER_SUCCESS,
      CLEAR_ERROR } from "../consents/userConsent";
 
 
@@ -62,5 +66,41 @@ export const getUser = (state={loading:true,user:{}},action) => {
             return {
                 state
             }
+    }
+}
+
+export const ProfileReducer = (state= {loading:true,isUpdated:false},action)=> {
+    switch (action.type) {
+        case UPDATE_USER_REQUEST:
+            return {
+                ...state,
+                loading:true,
+            }
+        case UPDATE_USER_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                isUpdated:action.payload,
+            }
+        case UPDATE_USER_FAIL:
+            return {
+                ...state,
+                loading:false,
+                error:action.payload,
+            }
+
+        case UPDATE_USER_RESET:
+            return {
+                ...state,
+                isUpdated:false,
+            }
+        case CLEAR_ERROR :{
+            return {
+                ...state,
+                error:null,
+            }
+        }
+        default:
+            return state;
     }
 }

@@ -9,7 +9,7 @@ const customStyle = {
     alignItems: "center",
     textAlign: "center",
     justifyContent: "center",
-    backgroundColor: "#574c94"
+    backgroundColor: "#1b1b1b"
 };
 
 function Home() {

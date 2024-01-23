@@ -70,7 +70,6 @@ useEffect(() => {
     alignItems: "center",
     textAlign: "center",
     justifyContent: "center",
-    backgroundColor: "#574c94"
 };
 const customSearch = {
   alignItems:"center",

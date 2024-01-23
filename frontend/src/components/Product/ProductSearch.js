@@ -24,7 +24,7 @@ const ProductSearch = () => {
         onChange={(e) => setKeyword(e.target.value)}
         type="text"
         name="text"
-        className="input"
+        className="inputt"
         id="input"
         placeholder="Search..."
       />

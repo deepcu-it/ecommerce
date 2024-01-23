@@ -134,9 +134,19 @@ const updatepassword= catchmyerror(async(req,res,next)=>{
 })
 
 const updateProfile=catchmyerror(async(req,res,next)=>{
+    const userPassword = await User.findOne({email:req.body.oldEmail}).select("+password");
+    if(!userPassword) {
+        return new ErrorHandler("Log in to access");
+    }
+    const  isUserPasswordMatched = await userPassword.comparePassword(req.body.password);
+    if(!isUserPasswordMatched) {
+        return new ErrorHandler("Invalid password");
+    }
+    
     const newUserdata= {
         name:req.body.name,
-        email:req.body.email,
+        email:req.body.newEmail,
+        phoneNo:req.body.phoneNo,
     }
     //we will add cloudinary later
     const user=await User.findByIdAndUpdate(req.user.id,newUserdata,{

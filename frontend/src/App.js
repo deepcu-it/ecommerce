@@ -13,6 +13,9 @@ import store from './store.js';
 import { getUserDetails } from './actions/userAction.js';
 import React from 'react';
 import UserProfile from './components/user/UserProfile.js';
+import ProtectedRoute from './components/Route/ProtectedRoute.js';
+import UserUpdate from './components/user/userUpdate.js';
+import UserUpdatePassword from "./components/user/UserUpdatePassword.js"
 function App() {
   React.useEffect(()=>{
     store.dispatch(getUserDetails());
@@ -27,8 +30,12 @@ function App() {
         <Route path="/products/:keyword" element={<AllProducts/>} />
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<SignUp/>}/>
-        <Route exact path="/account" element={<UserProfile/>}/>
+        <Route exact path="/account/update/password" element={<UserUpdatePassword/>}/>
+        
+
       </Routes>
+      <ProtectedRoute exact path="/account" component={UserProfile}/>
+      <ProtectedRoute exact path="/account/update" component={UserUpdate}/>
       <Footer />
     </Router>
   );

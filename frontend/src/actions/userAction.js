@@ -9,6 +9,10 @@ import {
   CLEAR_ERROR,
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
+  UPDATE_USER_FAIL,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_RESET,
+  UPDATE_USER_SUCCESS,
 } from "../consents/userConsent.js";
 
 export const getUserDetails = () => async (dispatch) => {
@@ -88,6 +92,26 @@ export const userSignUp = (name,phoneNo,email,password) => async (
 
     dispatch({
       type: USER_FAIL,
+      payload: errorMessage,
+    });
+  }
+};
+
+export const updateProfile = (name,phoneNo,newEmail,oldEmail,password) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_USER_REQUEST });
+    const config = { headers: { "Content-type": "application/json" } };
+    const { data } = await axios.put("/api/v1/me/update", {name,phoneNo,newEmail,oldEmail,password},config);
+
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: data.user });
+  } catch (error) {
+    const errorMessage =
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : "An error occurred";
+
+    dispatch({
+      type: UPDATE_USER_FAIL,
       payload: errorMessage,
     });
   }

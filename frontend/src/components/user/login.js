@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 import "./loginSignup.css";
+import Loader from "../layout/Loader";
 const Login = () => {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
@@ -22,6 +23,7 @@ const Login = () => {
         if(isAuthenticated) navigate("/account");
     },[dispatch,error,isAuthenticated]);
     return (
+      loading? <Loader/> :
         <div>
         <div className="height1"></div>
         <div className="container"> 
