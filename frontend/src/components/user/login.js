@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./loginSignup.css";
 import Loader from "../layout/Loader";
 const Login = () => {
+
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const dispatch = useDispatch();
@@ -16,14 +17,17 @@ const Login = () => {
         e.preventDefault();
         dispatch(userLogin(email,password));
     }
-    const {loading, error,isAuthenticated, user} = useSelector((state)=> state.user);
-
+    const {loading, error,isAuthenticated} = useSelector((state)=> state.user);
+    
     useEffect(()=>{
-        if(error) notify(error);
-        if(isAuthenticated) navigate("/account");
+        if(error && error!=="An error occurred") notify(error);
+        if(isAuthenticated) {
+          navigate("/account");
+          return;
+        }
     },[dispatch,error,isAuthenticated]);
     return (
-      loading? <Loader/> :
+      loading && isAuthenticated? <Loader/> :
         <div>
         <div className="height1"></div>
         <div className="container"> 

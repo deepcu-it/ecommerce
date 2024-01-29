@@ -31,6 +31,7 @@ function Header() {
   const [loginToggle,setLoginToggle ]= useState("login");
   useEffect(()=>{
     if(isAuthenticated) setLoginToggle("logout");
+    else setLoginToggle("login"); 
   },[isAuthenticated]);
   return (
       <React.Fragment>
@@ -44,7 +45,7 @@ function Header() {
               <a href="/products" >Products <span><RiArrowDropDownLine style={customDownLine}/></span></a>
               <a href="/about" >About Us <span><RiArrowDropDownLine style={customDownLine}/></span></a>
               <a onClick={isAuthenticated ? logoutSubmit:gotoLogin}>{loginToggle}<span><TbLogout style={{cursor:"pointer",height:"23px",width:"27px"}}/></span></a>
-              <a href="/account"><img src="" className="user-profile"/></a>
+              <a href="/account"><img src="../components/user/Profile.png" className="user-profile"/></a>
             
               <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                 <FaTimes/>

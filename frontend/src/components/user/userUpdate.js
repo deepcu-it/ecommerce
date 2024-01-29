@@ -4,34 +4,42 @@ import {Button, Col, Image, Row } from "react-bootstrap";
 import { useDispatch,useSelector } from "react-redux";
 import Loader from "../layout/Loader.js";
 import { Link, useNavigate } from "react-router-dom";
-import { notify,ToastContainer } from "../notification.js";
 import { clearErrors, updateProfile } from "../../actions/userAction.js";
+import { notify,ToastContainer } from "../notification.js";
+import { UPDATE_USER_RESET } from "../../consents/userConsent.js";
+
 
 const img1 = "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
 
 const UserUpdate = ()=> {
-    const {loading,user,} = useSelector((state)=>state.user);
-    const [fullName, setFullName] = useState(user.name);
-    const [phoneNumber, setPhoneNumber] = useState(user.phoneNo);
-    const [newEmail, setnewEmail] = useState(user.email);
-    const [password,setPassword] = useState('');
-    const oldEmail = user.email;
     const dispatch = useDispatch();
     const navigate= useNavigate();
-    const handleSubmit = ()=> {
-        dispatch(updateProfile(fullName,phoneNumber,newEmail,oldEmail,password));
-    }
+    
+    const {loading,user,isAuthenticated} = useSelector((state)=>state.user);
     const {error,isUpdated} = useSelector((state)=>state.UpdatedUser);
+
+
+    const [fullName, setFullName] = useState(user && user.name);
+    const [phoneNumber, setPhoneNumber] = useState(user && user.phoneNo);
+    const [newEmail, setnewEmail] = useState(user && user.email);
+    const [password,setPassword] = useState('');
+    const oldEmail = user && user.email;
+   
     useEffect(()=>{
         if(error) {
             notify(error);
             dispatch(clearErrors);
         }
-       if(isUpdated){
-         notify("Profile Updated Succesfully");
-        navigate("/account");
-    }
+        if(isUpdated){
+            notify("Profile Updated Successfully");
+            navigate("/account");
+            dispatch({type:UPDATE_USER_RESET});
+        }
     },[dispatch,isUpdated,error]);
+    const handleSubmit = (e)=> {
+        e.preventDefault();
+        dispatch(updateProfile(fullName,phoneNumber,newEmail,oldEmail,password));
+    }
     const customImage = {
         borderRadius:"50%",
         margin:"20px",
@@ -78,6 +86,7 @@ const UserUpdate = ()=> {
                 <div><input className="input"  onChange={(e)=>setPassword(e.target.value)} type="password" placeholder="Enter password"/></div>
             </div>
             <Button onClick={handleSubmit} style={customButton}>Make Changes</Button>
+            <ToastContainer/>
             </Col>
             <div style={{height:"100px"}}></div>
         </Row>

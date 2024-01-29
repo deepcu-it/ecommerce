@@ -1,13 +1,15 @@
-import react from "react";
+import react, { useEffect } from "react";
 import "./userProfile.css"
 import {Button, Col, Image, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
+import { notify,ToastContainer } from "../notification.js";
 import Loader from "../layout/Loader.js";
 import { Link } from "react-router-dom";
 const img1 = "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
 
 const UserProfile = ()=> {
-    const {loading,user,error,isAuthenticated} = useSelector((state)=>state.user);
+    const {loading,user,isAuthenticated} = useSelector((state)=>state.user);
+    
     const customImage = {
         borderRadius:"50%",
         margin:"20px",
@@ -53,6 +55,7 @@ const UserProfile = ()=> {
             <Link to={"/account/update/password"}><Button style={customButton}>Change Password</Button></Link>
             </Col>
             <div style={{height:"100px"}}></div>
+            <ToastContainer/>
         </Row>
     )
 }

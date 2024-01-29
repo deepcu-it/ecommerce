@@ -11,8 +11,10 @@ import {
   LOGOUT_FAIL,
   UPDATE_USER_FAIL,
   UPDATE_USER_REQUEST,
-  UPDATE_USER_RESET,
   UPDATE_USER_SUCCESS,
+  UPDATE_PASSWORD_FAIL,
+  UPDATE_PASSWORD_REQUEST,
+  UPDATE_PASSWORD_SUCCESS,
 } from "../consents/userConsent.js";
 
 export const getUserDetails = () => async (dispatch) => {
@@ -103,7 +105,7 @@ export const updateProfile = (name,phoneNo,newEmail,oldEmail,password) => async 
     const config = { headers: { "Content-type": "application/json" } };
     const { data } = await axios.put("/api/v1/me/update", {name,phoneNo,newEmail,oldEmail,password},config);
 
-    dispatch({ type: UPDATE_USER_SUCCESS, payload: data.user });
+    dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success });
   } catch (error) {
     const errorMessage =
       error.response && error.response.data && error.response.data.err
@@ -116,7 +118,30 @@ export const updateProfile = (name,phoneNo,newEmail,oldEmail,password) => async 
     });
   }
 };
+export const updatePassword = (oldpassword, newpassword,confirmpassword) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PASSWORD_REQUEST });
 
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put(
+      "/api/v1/password/update",
+      { oldpassword, newpassword,confirmpassword },
+      config
+    );
+
+    dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
+  } catch (error) {
+    const errorMessage =
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : error.message || "An error occurred";
+
+    dispatch({
+      type: UPDATE_PASSWORD_FAIL,
+      payload: errorMessage,
+    });
+  }
+};
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };
