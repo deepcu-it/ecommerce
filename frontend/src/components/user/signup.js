@@ -3,7 +3,7 @@ import "./loginSignup.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { notify ,ToastContainer} from "../notification";
-import { userSignUp } from "../../actions/userAction";
+import { clearErrors, userSignUp } from "../../actions/userAction";
 
 
 const SignUp = () => {
@@ -27,8 +27,10 @@ const SignUp = () => {
     const dispatch = useDispatch();
     const navigate= useNavigate();
     useEffect(()=>{
-        if(error) notify(error);
-
+        if(error) {
+            notify(error);
+            dispatch(clearErrors());
+        }
         if(isAuthenticated) {
             navigate("/account");
         }

@@ -48,6 +48,27 @@
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
   }
   
+  /* Home.css */
+
+.banner h1 {
+  font-size: 3.5vw;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 2s steps(30, end) infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: white; }
+}
+
  @-webkit-keyframes color-change-3x{0%{background:#19dcea}50%{background:#b22cff}100%{background:#ea2222}}@keyframes color-change-3x{0%{background:#19dcea}50%{background:#b22cff}100%{background:#ea2222}}
 
 

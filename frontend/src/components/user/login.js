@@ -1,5 +1,5 @@
 import react ,{useEffect,useState} from "react";
-import { userLogin } from "../../actions/userAction";
+import { clearErrors, userLogin } from "../../actions/userAction";
 import { useNavigate } from "react-router-dom";
 import { notify ,ToastContainer} from "../notification";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +20,10 @@ const Login = () => {
     const {loading, error,isAuthenticated} = useSelector((state)=> state.user);
     
     useEffect(()=>{
-        if(error && error!=="An error occurred") notify(error);
+        if(error)  {
+          notify(error);
+          dispatch(clearErrors());
+        }
         if(isAuthenticated) {
           navigate("/account");
           return;

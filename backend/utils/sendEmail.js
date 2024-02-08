@@ -6,17 +6,17 @@ const sendEmail =async (options)=> {
        port:465,
         service:"Gmail",
         auth:{
-            user:process.env.SMTP_MAIL,
-            pass:process.env.SMTP_PASSWORD,
+            user:"kakalighosal333@gmail.com",
+            pass:"Deep2005@",
         },
     })
     const mailoptions= {
-        from:"",
+        from:"kakalighosal333@gmail.com",
         to:options.email,
         subject:options.subject,
         text:options.message
     }
-    await transporter.sendEmail(mailoptions);
+    await transporter.sendMail(mailoptions);
 
     console.log("Created");
 

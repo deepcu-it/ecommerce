@@ -9,6 +9,7 @@ import { useParams,useNavigate } from "react-router-dom";
 import Product from "../Home/product.js"
 import Typography from '@material-ui/core/Typography'; 
 import Slider from '@material-ui/core/Slider'; 
+import ProductFilter from "./ProductFilter.js";
 
 const AllProducts = () => {
   const { keyword } = useParams();
@@ -96,12 +97,15 @@ const customSearch = {
         <ProductSearch />
 
       </div>
+      <ProductFilter/>
+      <div className="height1"></div>
+
       <Row style={customStyleofRow}>
         {!loading ? (
           products.length? (
           products.map((product, index) => (
-            <Col key={product._id}>
-              <Link to={`/product/${product._id}`}>
+            <Col>
+              <Link to={`/product/${product._id}`} >
                  <Product
                     key={product._id} // Assuming each product has a unique identifier
                     P_id={product._id}
@@ -113,7 +117,7 @@ const customSearch = {
                     reviewCount={product.reviews.length}
                    />
               </Link>
-            </Col>
+              </Col>
           ))) : (
             <h2>No product found</h2>
           )

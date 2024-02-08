@@ -64,11 +64,10 @@ const forgotPassword= catchmyerror(async (req,res,next) => {
     if(!user) {
         return next(new ErrorHandler("user not found",404));
     }
-    const resetToken=await user.getResetPasswordToken();
+    const resetToken="77788765";
     await user.save({validateBeforeSave:false});
 
-    const resetPasswordurl = `${req.protocol}://${req.get("host")}/api/v1/password/reset/${resetToken}`;
-    const message=`Your password reset token is :- \n\n ${resetPasswordurl}\n\n  if you have not requested this email. ignore it`;
+    
     // try{
     //     await sendEmail({
     //         email:user.email,
@@ -80,13 +79,14 @@ const forgotPassword= catchmyerror(async (req,res,next) => {
     //         message:`Email is sent ot ${user.email}`,
     //     })
     // }catch(error) {
+    //     console.log(error);
     //     user.resetPasswordToken=undefined;
     //     user.resetPasswordToken=undefined;
     //     await user.save({validateBeforeSave:false});
     //     return next(new ErrorHandler(err.meassage,500));
     // }
 
-    console.log("send email succesfully");
+    // console.log("send email succesfully");
     res.status(200).json({
         success:true,
     })

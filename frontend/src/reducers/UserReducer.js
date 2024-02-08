@@ -14,6 +14,9 @@ import { USER_FAIL,
      UPDATE_PASSWORD_REQUEST,
      UPDATE_PASSWORD_SUCCESS,
      UPDATE_PASSWORD_RESET,
+     FORGOT_PASSWORD_FAIL,
+     FORGOT_PASSWORD_REQUEST,
+     FORGOT_PASSWORD_SUCCESS,
      CLEAR_ERROR } from "../consents/userConsent";
 
 
@@ -96,7 +99,7 @@ export const ProfileReducer = (state={loading:true,isUpdated:false},action)=> {
         case UPDATE_USER_RESET:
             case UPDATE_PASSWORD_RESET:
             return {
-            
+                loading:false,
                 isUpdated:false,
             }
         case CLEAR_ERROR :{
@@ -106,6 +109,34 @@ export const ProfileReducer = (state={loading:true,isUpdated:false},action)=> {
             }
         }
         default:
+            return state;
+    }
+}
+export const PasswordReducer = (state = {}, action) => {
+    switch (action.type) {
+        case FORGOT_PASSWORD_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            };
+        case FORGOT_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isForgotted: action.payload,
+            }
+        case FORGOT_PASSWORD_FAIL:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload,
+            }           
+        case CLEAR_ERROR:
+            return {
+                ...state,
+                error: null,
+            }
+        default: 
             return state;
     }
 }

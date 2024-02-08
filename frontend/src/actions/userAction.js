@@ -15,6 +15,9 @@ import {
   UPDATE_PASSWORD_FAIL,
   UPDATE_PASSWORD_REQUEST,
   UPDATE_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_FAIL,
+  FORGOT_PASSWORD_REQUEST,
+  FORGOT_PASSWORD_SUCCESS,
 } from "../consents/userConsent.js";
 
 export const getUserDetails = () => async (dispatch) => {
@@ -142,6 +145,25 @@ export const updatePassword = (oldpassword, newpassword,confirmpassword) => asyn
     });
   }
 };
+export const forgetPassword = (email) => async (dispatch) => {
+  try {
+    dispatch({type:FORGOT_PASSWORD_REQUEST});
+    const config = { headers: { "Content-type": "application/json" } };
+    const {data} = await axios.post("/api/v1/password/forgot",{email},config);
+    dispatch({type:FORGOT_PASSWORD_SUCCESS,payload:data.success});
+  }catch(error)  {
+    console.log(`first errror  ${error}`);
+    const errorMessage =
+    error.response && error.response.data && error.response.data.err
+      ? error.response.data.err
+      : error.message || "An error occurred";
+
+  dispatch({
+    type: FORGOT_PASSWORD_FAIL,
+    payload: errorMessage,
+  });
+  }
+}
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };

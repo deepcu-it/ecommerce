@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardImg, CardTitle, CardText, Button, Row, Col } from 'react-bootstrap';
 import{ FaShoppingCart  }from "react-icons/fa";
+import "./product.css";
 import {Link} from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 const customStyle= {
@@ -19,11 +20,13 @@ const Product = (props) => {
   };
   const cardStyle = {
     boxShadow: isMouseHovered ? '0 14px 16px rgba(0, 0, 0, 0.2), 0 12px 14px rgba(0, 0, 0, 0.16)' : 'none',
+    animation : 'scale-slide 1.3s ease-out both',
+    transition:'box-shadow 0.3s ease-in',
   };
   return (
     <Card onMouseOver={ChangeMouseOver}
           onMouseOut={ChangeMouseOut}
-          style={{...cardStyle,margin:"1.25vw",transition:'box-shadow 0.3s ease-in-out'}}
+          style={{...cardStyle,margin:"1.25vw"}}
     >
       <Col>
         <Link to={`/product/${props.P_id}`}>
