@@ -1,46 +1,47 @@
 import React from "react";
-import { Card, CardImg, CardTitle, CardText, Button, Row, Col } from 'react-bootstrap';
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../actions/cartAction";
+import { notify } from "../notification";
 import ReactStars from "react-rating-stars-component";
 import { FaShoppingCart } from "react-icons/fa";
+import "./cartComponent.css"; 
+
 
 const CartComponent = (props) => {
-    return (
-        <Card style={{marginBottom:"1.25vw"}}>
-          <Col>
-              <Row style={ {height:"200px",width:"350px",padding:"2%"}}>
-                <CardImg  src={props.images} alt={props.name} />
-              </Row>
-            <Row style={{padding:"2%",fontSize:"25px"}}>
-              <Col>
-              <CardText>{props.name}</CardText>
-              </Col>
-              <Col>
-              <CardText>${props.price}</CardText>
-              </Col>
-    
-            </Row>
-            <Row style={{padding:"2%"}}>
-              <CardTitle>{props.description}</CardTitle>
-            </Row>
-            <Row style={{padding:"2%"}}>
-              <Col>
-              <ReactStars 
-               count={5}
-               size={24}
-               activeColor="#ffd700"
-                value={4}
-              />
-              </Col>
-              <Col>
-                <span> {`${props.reviewCount} Reviews`}</span>
-              </Col>
-            </Row>
-            <Row style={{padding:"2%"}}>
-                <Button style={{width:"100%",fontSize:"20px",padding:"2%"}} variant="primary">Buy Now</Button>
-            </Row>
-          </Col>
-        </Card>
-      );
-    };
-    
-export default CartComponent
+  const dispatch = useDispatch();
+  const img1= "https://i.pinimg.com/236x/dc/d4/0d/dcd40d9a7f9cf6a52e6cd4b2b93b15f6.jpg"
+  const handleDeleteFromCart = () => {
+    dispatch(removeFromCart(props.id));
+    notify("Product Deleted from cart");
+  };
+
+  return (
+    <div className="cart-card">
+      <div className="cart-image-container">
+        <img src={img1} alt={props.name} className="cart-image" />
+      </div>
+      <div className="cart-details">
+        <div className="cart-info">
+          <h3 className="cart-name">{props.name}</h3>
+          <h3 className="cart-price">${props.price}</h3>
+        </div>
+        <p className="cart-description">{props.description}</p>
+        <div className="cart-rating">
+          <ReactStars
+            count={5}
+            size={24}
+            activeColor="#ffd700"
+            value={4} 
+          />
+          <span className="cart-review-count">{`${props.reviewCount} Reviews`}</span>
+        </div>
+        <div className="cart-buttons">
+          <button className="cart-buy-now" onClick={() => {}}>Buy Now</button>
+          <button className="cart-remove" onClick={handleDeleteFromCart}>Remove from Cart</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CartComponent;

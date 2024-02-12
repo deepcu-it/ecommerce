@@ -20,9 +20,11 @@ function Home() {
     const { loading, error, products, productCount } = useSelector((state) => state.products);
     const [bannerText, setBannerText] = useState("");
     const bannerTitles = [
-        "FIND PRODUCT BEYOND YOUR THOUGHT",
+        "PRODUCT BEYOND THOUGHT",
         "DISCOVER AMAZING DEALS",
-        "EXPLORE UNIQUE ITEMS"
+        "COLLECTION UNIQUE ITEMS",
+        "TRENDING OFFERS FOR YOU",
+        "TRENDING OFFERS RECENT",
     ];
 
     useEffect(() => {
@@ -35,7 +37,7 @@ function Home() {
         const intervalId = setInterval(() => {
             setBannerText(bannerTitles[index]);
             index = (index + 1) % bannerTitles.length;
-        }, 2000);
+        }, 6000);
 
         return () => clearInterval(intervalId);
     };

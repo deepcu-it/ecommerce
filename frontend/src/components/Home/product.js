@@ -1,75 +1,56 @@
 import React, { useState } from 'react';
-import { Card, CardImg, CardTitle, CardText, Button, Row, Col } from 'react-bootstrap';
-import{ FaShoppingCart  }from "react-icons/fa";
-import "./product.css";
-import {Link} from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
-const customStyle= {
-  maxWidth: '350px', 
-  maxHeight: '200px',
-  borderRadius:'1px',
-}
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../actions/cartAction';
+import {Button} from 'react-bootstrap'
+import { ToastContainer, notify } from '../notification';
+import "./product.css"; 
 
 const Product = (props) => {
-  const [isMouseHovered,setMouseHovered]=useState(false);
-  const ChangeMouseOver=() => {
-    setMouseHovered(true);
-  };
-  const ChangeMouseOut=() => {
-    setMouseHovered(false);
-  };
-  const cardStyle = {
-    boxShadow: isMouseHovered ? '0 14px 16px rgba(0, 0, 0, 0.2), 0 12px 14px rgba(0, 0, 0, 0.16)' : 'none',
-    animation : 'scale-slide 1.3s ease-out both',
-    transition:'box-shadow 0.3s ease-in',
-  };
-  return (
-    <Card onMouseOver={ChangeMouseOver}
-          onMouseOut={ChangeMouseOut}
-          style={{...cardStyle,margin:"1.25vw"}}
-    >
-      <Col>
-        <Link to={`/product/${props.P_id}`}>
-          <Row style={ {height:"200px",width:"350px",padding:"2%"}}>
-            <CardImg style={ customStyle }  src={props.images} alt={props.name} />
-          </Row>
-        </Link>
-        <Row style={{padding:"2%",fontSize:"25px"}}>
-          <Col>
-          <CardText>{props.name}</CardText>
-          </Col>
-          <Col>
-          <CardText>${props.price}</CardText>
-          </Col>
+  const [isMouseHovered, setMouseHovered] = useState(false);
+  const dispatch = useDispatch();
+  const img1= "https://i.pinimg.com/236x/dc/d4/0d/dcd40d9a7f9cf6a52e6cd4b2b93b15f6.jpg"
 
-        </Row>
-        <Row style={{padding:"2%"}}>
-          <CardTitle>{props.description}</CardTitle>
-        </Row>
-        <Row style={{padding:"2%"}}>
-          <Col>
-          <ReactStars 
-           count={5}
-           //onChange={ratingChanged}
-           size={24}
-           activeColor="#ffd700"
-           value={props.rating}
+  const handleAddToCart = () => {
+    const quantity = 1;
+    dispatch(addToCart(props.P_id, quantity));
+    notify("Added to cart");
+  };
+
+  return (
+    <div
+      onMouseOver={() => setMouseHovered(true)}
+      onMouseOut={() => setMouseHovered(false)}
+      className="product-card" 
+    >
+      <ToastContainer />
+      <Link to={`/product/${props.P_id}`}>
+        <img className="product-image" src={img1} alt={props.name} />
+      </Link>
+      <div style={{ padding: '10px' }}>
+        <div className="product-info">
+          <h3>{props.name}</h3>
+          <h3>{props.price}</h3>
+        </div>
+        <p>{props.description}</p>
+        <div className="product-rating">
+          <ReactStars
+            count={5}
+            size={24}
+            activeColor="#ffd700"
+            value={props.rating}
           />
-          </Col>
-          <Col>
-            <span> {`${props.reviewCount} Reviews`}</span>
-          </Col>
-        </Row>
-        <Row style={{padding:"2%"}}>
-          <Col>
-            <Button variant="primary">Add to Cart <span><FaShoppingCart /></span></Button>
-          </Col>
-          <Col>
-            <Button variant="primary">Buy Now</Button>
-          </Col>
-        </Row>
-      </Col>
-    </Card>
+          <span style={{ marginLeft: '15px' }}>{`${props.reviewCount} Reviews`}</span>
+        </div>
+        <div style={{ marginTop: '10px' }}>
+          <Button onClick={() => handleAddToCart()} style={{ marginRight: '15px' }}>Add to Cart</Button>
+          <Button>Buy Now</Button>
+        </div>
+      </div>
+      
+    </div>
   );
 };
 

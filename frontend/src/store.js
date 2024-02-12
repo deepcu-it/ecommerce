@@ -3,17 +3,23 @@ import { thunk, withExtraArgument } from 'redux-thunk';
 import {composeWithDevTools} from "redux-devtools-extension";
 import { productDetailReducer, productReducer } from "./reducers/ProductReducer";
 import {PasswordReducer, ProfileReducer, getUser} from "./reducers/UserReducer";
+import { CartReducer } from "./reducers/cartReducer";
 
 const reducer= combineReducers({
     products:productReducer,
     productDetails: productDetailReducer,
     user:getUser,
     UpdatedUser:ProfileReducer,
-    forgotPassword:PasswordReducer
+    forgotPassword:PasswordReducer,
+    cart:CartReducer
 })
 
 
-let initialState={};
+let initialState={
+    cart:{
+        cartItems:localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")):[],
+    }
+};
 const middleWare=[thunk];
 
 const store= legacy_createStore(

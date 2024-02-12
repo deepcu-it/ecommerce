@@ -70,6 +70,7 @@ useEffect(() => {
   const customStyleofRow = {
     alignItems: "center",
     textAlign: "center",
+
     justifyContent: "center",
 };
 const customSearch = {
@@ -77,9 +78,10 @@ const customSearch = {
   justifyContent:"center",
   display:sizeOfWindow>600 ? "flex" : "",
 }
+
   return (
     <Row>
-      <div style={{ height: "100px" }}></div>
+      <div className="height1"></div>
       <div style={customSearch}>
         <div style={{color:"white",width:"250px",margin:"60px"}}>
           <Typography>Filter product by price </Typography>

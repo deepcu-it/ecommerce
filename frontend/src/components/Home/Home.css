@@ -1,15 +1,9 @@
 .banner {
     color: black;
-    height: fit-content;
     padding: 160px 40px 20px 40px ;
-    width:100%;
-    min-height: fit-content;
     height: 420px;
-    align-items: center;
     justify-content: center;
-    text-align: center;
-    -webkit-animation:color-change-3x 4s linear infinite alternate both;
-        animation:color-change-3x 4s linear infinite alternate both;
+    align-items: center;
 }
 
 *{
@@ -24,7 +18,6 @@
     font-size: 5vw;
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-weight: 400;
-    -webkit-animation:tracking-in-expand .0-97s cubic-bezier(.215,.61,.355,1.000) both;
     animation:tracking-in-expand 1.97s cubic-bezier(.215,.61,.355,1.000) both;
 }
 
@@ -50,26 +43,29 @@
   
   /* Home.css */
 
-.banner h1 {
+.banner >h1 {
   font-size: 3.5vw;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-weight: 400;
   white-space: nowrap;
+  color: white;
   overflow: hidden;
-  animation: typing 2s steps(30, end) infinite;
+  animation: reverse-typing 3s linear infinite,typing 3s linear 3s infinite alternate-reverse;
 }
 
 @keyframes typing {
   from { width: 0 }
   to { width: 100% }
 }
-
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: white; }
+@keyframes reverse-typing {
+  from { width: 100% }
+  to { width: 0 }
 }
 
- @-webkit-keyframes color-change-3x{0%{background:#19dcea}50%{background:#b22cff}100%{background:#ea2222}}@keyframes color-change-3x{0%{background:#19dcea}50%{background:#b22cff}100%{background:#ea2222}}
 
 
-@-webkit-keyframes tracking-in-expand{0%{letter-spacing:-.5em;opacity:0}40%{opacity:.6}100%{opacity:1}}@keyframes tracking-in-expand{0%{letter-spacing:-.5em;opacity:0}40%{opacity:.6}100%{opacity:1}}
+@keyframes tracking-in-expand{
+  0%{letter-spacing:-.5em;opacity:0}
+  40%{opacity:.6}
+  100%{opacity:1}
+}
