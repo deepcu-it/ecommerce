@@ -7,8 +7,8 @@ import Loader from "../layout/Loader.js";
 import ProductSearch from "./ProductSearch.js";
 import { useParams,useNavigate } from "react-router-dom";
 import Product from "../Home/product.js"
-import Typography from '@material-ui/core/Typography'; 
-import Slider from '@material-ui/core/Slider'; 
+import Slider from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import ProductFilter from "./ProductFilter.js";
 
 const AllProducts = () => {
@@ -84,15 +84,15 @@ const customSearch = {
       <div className="height1"></div>
       <div style={customSearch}>
         <div style={{color:"white",width:"250px",margin:"60px"}}>
-          <Typography>Filter product by price </Typography>
-        <Slider
-          color="primary"
-          value={price}
-          onChange={handlePrice}
-          valueLabelDisplay="auto"
-          min={0}
-          max={25000}
-      />
+          <h3>Filter product by price </h3>
+          <Slider
+            min={0}
+            max={25000}
+            value={price}
+            onChange={handlePrice}
+            marks={{ 0: '0', 25000: '25000' }}
+          />
+
       <h4>Min Price:{price[0]}</h4>
       <h4>Max Price:{price[1]}</h4>
         </div>
