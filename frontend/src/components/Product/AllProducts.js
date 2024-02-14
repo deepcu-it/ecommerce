@@ -34,6 +34,7 @@ useEffect(() => {
   
   useEffect(() => {
     dispatch(getProduct(keyword,currentPage,price));
+   
   }, [dispatch, keyword,currentPage,price]);
 
 
@@ -88,13 +89,14 @@ const customSearch = {
           <Slider
             min={0}
             max={25000}
-            value={price}
-            onChange={handlePrice}
+            valuealue={price}
+            onChangeComplete={handlePrice}
             marks={{ 0: '0', 25000: '25000' }}
+
           />
 
-      <h4>Min Price:{price[0]}</h4>
-      <h4>Max Price:{price[1]}</h4>
+      <h4>Min Price:{price && price[0]}</h4>
+      <h4>Max Price:{price && price[1]}</h4>
         </div>
         <ProductSearch />
 

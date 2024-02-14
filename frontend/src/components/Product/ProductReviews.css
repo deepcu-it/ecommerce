@@ -2,9 +2,11 @@
     text-align: center;
 }
 .product-review {
-    padding: 50px 60px 20px 60px;
+    padding: 25px;
+    margin: 15px 30px 15px 30px;
     width: 100%;
     height: fit-content;
+    background-color: rgb(151, 74, 119);
     display: flex;
     text-align: justify;
 }

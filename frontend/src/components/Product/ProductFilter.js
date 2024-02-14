@@ -3,13 +3,12 @@ import './ProductFilter.css'
 const ProductFilter = () => {
     return (
         <div className="product-filter-height">
-            <div className="filter-button">Mobile Accessories</div>
-            <div className="filter-button">Laptop</div>
-            <div className="filter-button">Hair cream</div>
-            <div className="filter-button">Face Wash</div>
-            <div className="filter-button">Mobile</div>
-            <div className="filter-button">Trolly bag</div>
-            <div className="filter-button">Condom</div>
+            <div className="filter-button"><a href="/products/mobile-accessories">Mobile Accessories</a></div>
+            <div className="filter-button"><a href="/products/laptop">Laptop</a></div>
+            <div className="filter-button"><a href="/products/hair-cream">Hair cream</a></div>
+            <div className="filter-button"><a href="/products/Face-wash">Face Wash</a></div>
+            <div className="filter-button"><a href="/products/product">Product</a></div>
+            <div className="filter-button"><a href="/products/trolly-bag">Trolly bag</a></div>
         </div>
     )
 };

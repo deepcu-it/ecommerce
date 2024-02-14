@@ -17,7 +17,9 @@ import ProtectedRoute from './components/Route/ProtectedRoute.js';
 import UserUpdate from './components/user/userUpdate.js';
 import UserUpdatePassword from "./components/user/UserUpdatePassword.js"
 import ForgotPassword from './components/user/ForgotPassword.js';
-import UserCart from './components/user/Cart.js';
+import UserCart from './components/Shopping/Cart.js';
+import Payment from './components/Shopping/payment.js';
+
 function App() {
   React.useEffect(()=>{
     store.dispatch(getUserDetails());
@@ -33,11 +35,12 @@ function App() {
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<SignUp/>}/>
         <Route exact path="/forgot/password" element={<ForgotPassword/>}/>        
-        <Route exact path="/me/cart" element={<UserCart/>}/>
       </Routes>
       <ProtectedRoute exact path="/account" component={UserProfile}/>
       <ProtectedRoute exact path="/account/update" component={UserUpdate}/>
       <ProtectedRoute exact path="/account/update/password" component={UserUpdatePassword}/>
+      <ProtectedRoute exact path="/me/cart" component={UserCart}/>
+      <ProtectedRoute exact path="/products/payment/:id" component={Payment}/>
       <Footer />
     </Router>
   );

@@ -1,0 +1,60 @@
+.buy-now-container{
+    display: flex;
+}
+.buy-now-text {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: auto;
+    gap: 21px;
+    width: 50%;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px;
+}
+@media (max-width:600px) {
+    .buy-now-container{
+        flex-direction: column;
+    }
+    .buy-now-text{
+        width: 100%;
+    }
+    .payment-method-select{
+        font-size: 1.4rem;
+    }
+}
+.buy-now-input{
+    padding: 40px;
+    gap: 15px;
+}
+.payment-method-select{
+    display: flex;
+    gap: 40px;
+    font-size: 1.5rem;
+
+}
+.checkbox-group{
+    display: flex;
+    align-items: center;
+    gap: 10px;    
+}
+.checkbox-group>input{
+    height: 30px;
+    width: 30px;
+}
+.buy-now-payment-form{
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    padding: 20px;
+    font: 1em sans-serif;
+}
+.input{
+    font-size: 1.4rem;
+}
+.buy-now-select{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: fit-content;
+}

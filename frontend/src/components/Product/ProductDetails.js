@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import {  useParams, useNavigate } from "react-router-dom";
 import { clearErrors, getProductDetails } from "../../actions/productAction";
 import Loader from "../layout/Loader.js";
 import ReactStars from "react-rating-stars-component";
@@ -17,8 +17,8 @@ const img3 = "https://www.realmenrealstyle.com/wp-content/uploads/2023/09/man-dr
 
 const ProductDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [sizeOfWindow, setSizeOfWindow] = useState(window.innerWidth);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const fixingWindowSize = () => setSizeOfWindow(window.innerWidth);
@@ -26,14 +26,6 @@ const ProductDetails = () => {
     return () => {
       window.removeEventListener("resize", fixingWindowSize);
     };
-  }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % 3);
-    }, 3000);
-
-    return () => clearInterval(intervalId);
   }, []);
 
   const btnSize = sizeOfWindow > 800 ? "btn-lg" : sizeOfWindow > 615 ? "btn-md" : "btn-sm";
@@ -50,28 +42,33 @@ const ProductDetails = () => {
     dispatch(addToCart(product._id, quantity));
     notify("Added to Cart");
   };
+  const handleBuyNow = () => {
+    navigate(`/products/payment/${product._id}`);
+  }
 
   return (
     <div className="product-details-container">
       <div className="height1"></div>
       <div className="product-image-container">
       <div className="carousel-container">
-        <img src={currentImageIndex === 0 ? img1 : currentImageIndex === 1 ? img2 : img3} className="carousel-image" alt="Product Image" />
+        <img src={img3} className="carousel-image" alt="Product Image" />
       </div>
       <div className="product-info-container">
         {product ? (
           <>
-            <h2 className="product-name">{product.name}</h2>
+            <div className="product-name-price">
+              <h2 className="product-name">{product.name}</h2>
+              <h2 className="product-price">${product.price}</h2> 
+            </div>
             <div className="product-rating">
               <ReactStars count={5} size={24} activeColor="#ffd700" value={4} />
               <span className="review-count">{`${product.reviewCount} Reviews`}</span>
             </div>
-            <h3 className="product-price">${product.price}</h3>
             <div className="buttons-container">
-              <button onClick={handleAddToCart} className={`add-to-cart-button ${btnSize}`}>
+              <button onClick={handleAddToCart} className={`add-to-cart-button`}>
                 Add to Cart <span><FaShoppingCart /></span>
               </button>
-              <button onClick={() => notify("Added Successfully")} className={`buy-now-button ${btnSize}`}>
+              <button onClick={handleBuyNow} className={`buy-now-button`}>
                 Buy Now
               </button>
             </div>
