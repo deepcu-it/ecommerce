@@ -19,6 +19,8 @@ import UserUpdatePassword from "./components/user/UserUpdatePassword.js"
 import ForgotPassword from './components/user/ForgotPassword.js';
 import UserCart from './components/Shopping/Cart.js';
 import Payment from './components/Shopping/payment.js';
+import DeliveryAddress from './components/Shopping/DeliveryAddress.js';
+import PaymentSuccess from './components/Shopping/PaymentSuccess.js';
 
 function App() {
   React.useEffect(()=>{
@@ -34,13 +36,15 @@ function App() {
         <Route path="/products/:keyword" element={<AllProducts/>} />
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<SignUp/>}/>
-        <Route exact path="/forgot/password" element={<ForgotPassword/>}/>        
+        <Route exact path="/forgot/password" element={<ForgotPassword/>}/>  
       </Routes>
       <ProtectedRoute exact path="/account" component={UserProfile}/>
       <ProtectedRoute exact path="/account/update" component={UserUpdate}/>
       <ProtectedRoute exact path="/account/update/password" component={UserUpdatePassword}/>
       <ProtectedRoute exact path="/me/cart" component={UserCart}/>
+      <ProtectedRoute exact path="/products/address/:id" component={DeliveryAddress}/>
       <ProtectedRoute exact path="/products/payment/:id" component={Payment}/>
+      <ProtectedRoute exact path="/products/payment/success/confirmation" component={PaymentSuccess}/>
       <Footer />
     </Router>
   );

@@ -46,7 +46,7 @@ const Product = (props) => {
         </div>
         <div style={{ marginTop: '10px' }}>
           <Button onClick={() => handleAddToCart()} style={{ marginRight: '15px' }}>Add to Cart</Button>
-          <Button href={`/products/payment/${props.P_id}`}>Buy Now</Button>
+          <Button href={`/products/address/${props.P_id}`}>Buy Now</Button>
         </div>
       </div>
       

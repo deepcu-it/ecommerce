@@ -1,29 +1,20 @@
 import react, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import Loader from "../layout/Loader";
 import "./payment.css";
 import { Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { getProductDetails } from "../../actions/productAction";
-import { notify, ToastContainer } from "../notification";
 
 const Payment = () => {
     const [cardPayment, setCardPayment] = useState(false);
     const [upiPayment, setUpiPayment] = useState(false);
-    const dispatch= useDispatch();
-    const {id} = useParams();
-    useEffect(()=>{
-        dispatch(getProductDetails(id));
-        // if(error) {
-        //     notify(error);
-        // }
-    },[id]);
     const {loading,product} = useSelector((state)=>state.productDetails);
+    const navigate = useNavigate();
+    const handlePayment = () => {
+        navigate("/products/payment/success/confirmation");
+    }
     return (
-        loading? <Loader/> : <div>
+        <div>
             <div className="height1"></div>
-            <ToastContainer/>
                 <div className="buy-now-container">
                     <div className="buy-now-text">
                         <h1>Billing and Payment</h1>
@@ -55,9 +46,11 @@ const Payment = () => {
                                 <label>Pay with UPI</label>
                             </div>
                         </div>
-                        {cardPayment && <form className="buy-now-payment-form">
+                        {cardPayment && <div className="buy-now-payment-form">
                             <label>Card Number:</label>
                             <input type="text" className="input" name="cardNumber" placeholder="1234 1234 1234 1234" required />
+                            <span></span>
+                            
 
                             <label>Name on Card:</label>
                             <input type="text" className="input" name="cardName" placeholder="John Doe" required />
@@ -67,18 +60,18 @@ const Payment = () => {
 
                             <label >CVV:</label>
                             <input type="text" className="input" name="cvv" placeholder="123" required />
-
-                            <button type="submit" className="buy-now-button">Pay $ {product.price}</button>
-                        </form>}
-                        {upiPayment && <form className="buy-now-payment-form">
+                                
+                            <button onClick={handlePayment} className="buy-now-button">Pay ${product.price}</button>
+                        </div>}
+                        {upiPayment && <div className="buy-now-payment-form">
                             <label>UPI ID:</label>
                             <input type="text" className="input" name="upiId" placeholder="example@upi" required />
 
                             <label>UPI PIN:</label>
                             <input type="password" className="input" name="upiPin" placeholder="****" required />
 
-                            <button type="submit" className="buy-now-button">Pay $ {product.price}</button>
-                        </form>}
+                            <button onClick={handlePayment} className="buy-now-button">Pay ${product.price}</button>
+                        </div>}
                     </div>
                 </div>
         </div>

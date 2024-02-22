@@ -43,7 +43,7 @@ const ProductDetails = () => {
     notify("Added to Cart");
   };
   const handleBuyNow = () => {
-    navigate(`/products/payment/${product._id}`);
+    navigate(`/products/address/${product._id}`);
   }
 
   return (
@@ -54,7 +54,7 @@ const ProductDetails = () => {
         <img src={img3} className="carousel-image" alt="Product Image" />
       </div>
       <div className="product-info-container">
-        {product ? (
+        {!loading ? (
           <>
             <div className="product-name-price">
               <h2 className="product-name">{product.name}</h2>

@@ -4,8 +4,8 @@ import ErrorHandler from "../utils/errorhandler.js";
 import catchmyerror from "../middleware/catchmyerror.js";
 
 const newOrder=catchmyerror(async(req,res,next)=>{
-    req.body.user=req.user._id;
-    req.body.orderItems.product=req.product.id;
+    //req.body.user=req.user._id;
+    //req.body.orderItems.product=req.product.id;
 
     const order = await Order.create(req.body);
 
@@ -17,7 +17,7 @@ const newOrder=catchmyerror(async(req,res,next)=>{
 
 const getSingleOrder=catchmyerror(async(req,res,next)=>{
     
-    const order = await Order.findById(req.params.id).populate("user","name email");
+    const order = await Order.findById(req.params.id);
     if(!order) {
         return next(new ErrorHandler("order not found",400));
     }
@@ -28,9 +28,8 @@ const getSingleOrder=catchmyerror(async(req,res,next)=>{
     })
 })
 const getmyOrder=catchmyerror(async(req,res,next)=>{
-    
     const orders = await Order.find({user:req.user._id});
-    if(!orders) {
+    if(orders.length===0) {
         return next(new ErrorHandler("you have no order",400));
     }
 
@@ -43,9 +42,10 @@ const deleteOrder=catchmyerror(async(req,res,next)=>{
     
     const order = await Order.findById(req.params.id);
    
-    await order.remove();
+    await order.deleteOne();
     res.status(200).json({
         success:true,
+        message:"Order deleted successfully"
     })
 })
 
@@ -76,6 +76,9 @@ const updateOrderStatus=catchmyerror(async(req,res,next)=>{
     if(req.body.status==="Delivered") {
         order.deliveryAt=Date.now();
     }
+    res.status(200).json({
+        success:true,
+    })
 })
 
 async function updateStock(id,quantity) {

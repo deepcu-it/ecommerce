@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+import User from "./usermodel.js";
 const orderSchema=new mongoose.Schema({
     shippingInfo:{
         address:{
@@ -71,7 +71,7 @@ const orderSchema=new mongoose.Schema({
     paidAt:{
         type:Date,
         required:true,
-        default:Date.now
+        default:Date.now()
     },
     itemsPrice:{
         type:Number,
@@ -100,7 +100,7 @@ const orderSchema=new mongoose.Schema({
     },
     deliveryAt:{
         type:Date,
-        default:Date.now,
+        default:Date.now(),
     }
 })
 
