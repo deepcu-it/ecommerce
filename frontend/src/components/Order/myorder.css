@@ -1,0 +1,43 @@
+.height1 {
+    height: 80px;
+    width: 100%;
+}
+
+.order-table {
+    text-align: center;
+    margin: auto; 
+    border-collapse: collapse; 
+}
+
+.order-table>tr> th,
+.order-table>tr> td {
+    padding: 10px;
+    font-size:1.5rem;
+}
+th{
+    font: 1.7rem;
+}
+.order-name-cell{
+    text-align: start;
+    width:40%;
+}
+.order-table > p{
+    font-size:1.7rem;
+}
+
+@media (max-width: 600px) {
+    .order-table>tr> th,
+    .order-table>tr> td {
+        font-size: 1rem;
+        padding: 6px;
+    }
+    .order-name-cell{
+        width:fit-content;
+
+    }
+    th{
+        font: 1.2rem;
+    }
+}
+
+

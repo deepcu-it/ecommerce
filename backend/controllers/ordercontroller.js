@@ -5,7 +5,7 @@ import catchmyerror from "../middleware/catchmyerror.js";
 
 const newOrder=catchmyerror(async(req,res,next)=>{
     //req.body.user=req.user._id;
-    //req.body.orderItems.product=req.product.id;
+    //req.body.orderItems.product=req.product._id;
 
     const order = await Order.create(req.body);
 

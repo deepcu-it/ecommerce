@@ -51,7 +51,7 @@ const UserProfile = ()=> {
                 <div>Delivery Email:</div>
                 <div>{ user && user.email}</div>
             </div>
-            <Link><Button style={customButton}>My Orders</Button></Link>
+            <Link to={"/account/orders"}><Button style={customButton}>My Orders</Button></Link>
             <Link to={"/account/update/password"}><Button style={customButton}>Change Password</Button></Link>
             </Col>
             <div style={{height:"100px"}}></div>

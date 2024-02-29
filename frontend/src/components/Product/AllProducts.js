@@ -7,9 +7,9 @@ import Loader from "../layout/Loader.js";
 import ProductSearch from "./ProductSearch.js";
 import { useParams,useNavigate } from "react-router-dom";
 import Product from "../Home/product.js"
-import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 import ProductFilter from "./ProductFilter.js";
+import Slider from '@mui/material/Slider';
+
 
 const AllProducts = () => {
   const { keyword } = useParams();
@@ -57,7 +57,10 @@ useEffect(() => {
     setPrice(newPrice);
     
   }
-
+  const valuetext = (price) => {
+    return `${price}`;
+  };
+  
   const paginationBox = (index) => ({
     backgroundColor: selectedPageIndex === index ? "blue" : "white",
     color: "black",
@@ -86,14 +89,14 @@ const customSearch = {
       <div style={customSearch}>
         <div style={{color:"white",width:"250px",margin:"60px"}}>
           <h3>Filter product by price </h3>
-          <Slider
-            min={0}
-            max={25000}
-            valuealue={price}
-            onChangeComplete={handlePrice}
-            marks={{ 0: '0', 25000: '25000' }}
-
-          />
+          {/* <Slider
+  getAriaLabel={() => 'Minimum distance'}
+  value={price}
+  onChange={handlePrice}
+  valueLabelDisplay="auto"
+  getAriaValueText={valuetext}
+  disableSwap
+/> */}
 
       <h4>Min Price:{price && price[0]}</h4>
       <h4>Max Price:{price && price[1]}</h4>

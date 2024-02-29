@@ -112,7 +112,7 @@ export const ProfileReducer = (state={loading:true,isUpdated:false},action)=> {
             return state;
     }
 }
-export const PasswordReducer = (state = {}, action) => {
+export const PasswordReducer = (state = {loading: true, isForgotted: false}, action) => {
     switch (action.type) {
         case FORGOT_PASSWORD_REQUEST:
             return {

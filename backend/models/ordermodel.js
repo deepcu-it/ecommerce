@@ -21,10 +21,12 @@ const orderSchema=new mongoose.Schema({
         },
         pincode:{
             type:Number,
+            maxLength:[6,"pincode cannot exceed 6 digit"],
             required:true
         },
         phoneNumber:{
             type:Number,
+            maxLength:[10,"phone number cannot exceed 10 digit"],
             required:true
         },
     },
@@ -40,17 +42,9 @@ const orderSchema=new mongoose.Schema({
             },
             quantity:{
                 type:Number,
+                default:1,
                 required:true
             },
-            image:{
-                type:String,
-                required:true
-            },
-            product:{
-                type:mongoose.Schema.ObjectId,
-                ref:"Product",
-                required:true,
-            }
         }
     ],
     user:{
@@ -61,11 +55,11 @@ const orderSchema=new mongoose.Schema({
     paymentInfo:{
         id:{
             type:String,
-            required:true,
+            default:"",
         },
         status:{
             type:String,
-            required:true,
+            default:"",
         },
     },
     paidAt:{
