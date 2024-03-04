@@ -22,6 +22,7 @@ import Payment from './components/Shopping/payment.js';
 import DeliveryAddress from './components/Shopping/DeliveryAddress.js';
 import PaymentSuccess from './components/Shopping/PaymentSuccess.js';
 import MyOrder from './components/Order/Myorder.js';
+import AdminHome from './components/Admin/AdminHome.js';
 
 function App() {
   React.useEffect(()=>{
@@ -34,10 +35,11 @@ function App() {
         <Route exact path='/' element={<Home />} />
         <Route exact path='/product/:id' element={<ProductDetails />} />
         <Route exact path="/products" element={<AllProducts/>} />
-        <Route path="/products/:keyword" element={<AllProducts/>} />
+        <Route       path="/products/:keyword" element={<AllProducts/>} />
         <Route exact path="/login" element={<Login/>}/>
         <Route exact path="/signup" element={<SignUp/>}/>
         <Route exact path="/forgot/password" element={<ForgotPassword/>}/>  
+        <Route exact path ="/admin-route" element={<AdminHome/>}/>
       </Routes>
       <ProtectedRoute exact path="/account" component={UserProfile}/>
       <ProtectedRoute exact path="/account/orders" component={MyOrder}/>

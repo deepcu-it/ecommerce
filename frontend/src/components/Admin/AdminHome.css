@@ -1,0 +1,13 @@
+.admin-home-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items:center; 
+    gap:20px; 
+    margin-top: 30px;
+}
+.admin-home-container > a > button{
+    max-width: 300px;
+    min-width: 200px;
+    height: 50px;
+}

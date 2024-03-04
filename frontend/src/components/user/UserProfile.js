@@ -18,6 +18,7 @@ const UserProfile = ()=> {
     }
     const customButton = {
         width:"170px",
+        
         margin:"15px",
         padding:"10px",
     }
@@ -37,6 +38,7 @@ const UserProfile = ()=> {
             <Col style={customCol}>
                 <div><img src={img1} className="user-image" /></div>
                 <Link to={"/account/update"}><Button style={customButton}>Edit Profile</Button></Link>
+                {user.role=="admin" && <Link to={"/admin-route"}><Button style={customButton}>Admin Config</Button></Link>}
             </Col>
             <Col style={customCol2}>
             <div className="user">

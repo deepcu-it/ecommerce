@@ -21,6 +21,9 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
   }
+  .product-card:hover{
+    transform: scale(1.05);
+  }
   
   .overlay {
     position: absolute;
