@@ -4,7 +4,10 @@ import {PLACE_ORDER_REQUEST,
     ALL_ORDER_REQUEST,
     ALL_ORDER_SUCCESS,
     ALL_ORDER_FAIL,
-    PLACE_ORDER_FAIL} from "../consents/orderConsent";
+    PLACE_ORDER_FAIL,
+    ADMIN_ALL_ORDER_FAIL,
+    ADMIN_ALL_ORDER_REQUEST,
+    ADMIN_ALL_ORDER_SUCCESS} from "../consents/orderConsent";
 
 export const OrderReducer = (state={loading:true},action) =>{
     switch (action.type) {
@@ -35,16 +38,19 @@ export const OrderReducer = (state={loading:true},action) =>{
 export const AllOrderReducer = (state={loading:true},action) =>{
     switch (action.type) {
         case ALL_ORDER_REQUEST:
+        case ADMIN_ALL_ORDER_REQUEST:
             return {
                 ...state,
                 loading:true,
             }
         case ALL_ORDER_SUCCESS:
+        case ADMIN_ALL_ORDER_SUCCESS:
             return {
                 loading: false,
                 orders: action.payload ,
             }
         case ALL_ORDER_FAIL:
+        case ADMIN_ALL_ORDER_FAIL:
             return {
                 loading:false,
                 error:action.payload,

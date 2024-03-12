@@ -1,0 +1,35 @@
+.create-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    margin: 25px;
+
+}
+.create-product-container{
+    display:flex;
+    gap:25px;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.create-product-left{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 1.6rem;
+}
+
+.create-product-right{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 1.6rem;
+
+}
+.create-product-images{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 30px;
+}

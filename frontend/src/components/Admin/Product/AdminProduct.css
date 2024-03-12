@@ -17,6 +17,10 @@
 .admin-product-details-heading{
     display: flex;
     gap: 20px;
+
+}
+.admin-product-get-details{
+    max-width: 250px;
 }
 .admin-product-description{
     max-width: 100px;

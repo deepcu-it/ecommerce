@@ -1,14 +1,16 @@
 import {legacy_createStore,combineReducers,applyMiddleware} from "redux";
 import { thunk, withExtraArgument } from 'redux-thunk';
 import {composeWithDevTools} from "redux-devtools-extension";
-import { productDetailReducer, productReducer } from "./reducers/ProductReducer";
-import {PasswordReducer, ProfileReducer, getUser} from "./reducers/UserReducer";
+import { UpdatedProduct, productDetailReducer, productReducer } from "./reducers/ProductReducer";
+import {PasswordReducer, ProfileReducer, getAllUserReducer, getUser} from "./reducers/UserReducer";
 import { CartReducer } from "./reducers/cartReducer";
 import {OrderReducer, AllOrderReducer} from "./reducers/orderReducer"
 
 const reducer= combineReducers({
     products:productReducer,
     productDetails: productDetailReducer,
+    UpdateProduct:UpdatedProduct,
+    getAllUser:getAllUserReducer,
     user:getUser,
     UpdatedUser:ProfileReducer,
     forgotPassword:PasswordReducer,

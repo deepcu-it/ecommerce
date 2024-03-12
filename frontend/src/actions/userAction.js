@@ -18,6 +18,9 @@ import {
   FORGOT_PASSWORD_FAIL,
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
+  ADMIN_GET_ALL_USER_FAIL,
+  ADMIN_GET_ALL_USER_REQUEST,
+  ADMIN_GET_ALL_USER_SUCCESS,
 } from "../consents/userConsent.js";
 
 export const getUserDetails = () => async (dispatch) => {
@@ -164,6 +167,18 @@ export const forgetPassword = (email) => async (dispatch) => {
   });
   }
 }
+
+export const getAllUser =()=> async(dispatch)=>{
+try{
+  dispatch({type:ADMIN_GET_ALL_USER_REQUEST});
+  const {data} = await axios.get("/api/v1/admin/users");
+  dispatch({type:ADMIN_GET_ALL_USER_SUCCESS,payload:data.user});
+  }catch(error) {
+    const errorMessage = error.response && error.response.data && error.response.data.err
+    dispatch({type:ADMIN_GET_ALL_USER_FAIL,payload:errorMessage});
+  }
+}
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };
+

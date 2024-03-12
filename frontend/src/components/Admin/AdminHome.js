@@ -1,12 +1,15 @@
 import React ,{useState} from "react"
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import AdminProduct from "./AdminProduct.js"
+import AdminProduct from "./Product/AdminProduct"
 import "./AdminHome.css"
+import AdminUser from "./User/AdminUser"
+import AdminOrder from "./Order/AdminOrder"
 const AdminHome = ()=>{
     const [openProduct,setOpenProduct]=useState(false);
     const [openOrder,setOpenOrder]=useState(false);
     const [openUser,setOpenUser]=useState(false);
+    
     const handleOpenBar = (option)=> {
         switch (option) {
             case "product":
@@ -37,6 +40,8 @@ const AdminHome = ()=>{
             </div>
             <div className="admin-home-content">
                 {openProduct && <AdminProduct/>}
+                {openOrder && <AdminOrder/>}
+                {openUser && <AdminUser/>}
             </div>
             <div className="height1"></div>
         </>

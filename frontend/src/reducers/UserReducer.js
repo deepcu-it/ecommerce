@@ -17,6 +17,9 @@ import { USER_FAIL,
      FORGOT_PASSWORD_FAIL,
      FORGOT_PASSWORD_REQUEST,
      FORGOT_PASSWORD_SUCCESS,
+     ADMIN_GET_ALL_USER_FAIL,
+     ADMIN_GET_ALL_USER_REQUEST,
+     ADMIN_GET_ALL_USER_SUCCESS,
      CLEAR_ERROR } from "../consents/userConsent";
 
 
@@ -138,5 +141,33 @@ export const PasswordReducer = (state = {loading: true, isForgotted: false}, act
             }
         default: 
             return state;
+    }
+}
+export const getAllUserReducer = (state={loading:true,users:[]},action)=>{
+    switch (action.type) {
+        case ADMIN_GET_ALL_USER_REQUEST:
+            return {
+                ...state,
+                loading:true,
+            }
+        case ADMIN_GET_ALL_USER_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                users:action.payload
+            }
+        case ADMIN_GET_ALL_USER_FAIL:
+            return {
+                ...state,
+                loading:false,
+                error:action.payload,
+            }
+        case CLEAR_ERROR:
+            return {
+                ...state,
+                error:null
+            }
+        default:
+            return state
     }
 }

@@ -23,6 +23,8 @@ import DeliveryAddress from './components/Shopping/DeliveryAddress.js';
 import PaymentSuccess from './components/Shopping/PaymentSuccess.js';
 import MyOrder from './components/Order/Myorder.js';
 import AdminHome from './components/Admin/AdminHome.js';
+import CreateProduct from './components/Admin/Product/CreateProduct.js';
+import UpdateProduct from './components/Admin/Product/UpdateProduct.js';
 
 function App() {
   React.useEffect(()=>{
@@ -40,6 +42,8 @@ function App() {
         <Route exact path="/signup" element={<SignUp/>}/>
         <Route exact path="/forgot/password" element={<ForgotPassword/>}/>  
         <Route exact path ="/admin-route" element={<AdminHome/>}/>
+        <Route exact path="/admin-route/product/create" element={<CreateProduct/>}/>
+        <Route       path="/admin-route/product/update/:id" element={<UpdateProduct/>}/>
       </Routes>
       <ProtectedRoute exact path="/account" component={UserProfile}/>
       <ProtectedRoute exact path="/account/orders" component={MyOrder}/>

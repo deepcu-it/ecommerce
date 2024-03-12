@@ -9,7 +9,10 @@ import {
     CANCEL_ORDER_SUCCESS,
     CLEAR_ERROR,
     CANCEL_ORDER_FAIL,
-    CANCEL_ORDER_REQUEST
+    CANCEL_ORDER_REQUEST,
+    ADMIN_ALL_ORDER_FAIL,
+    ADMIN_ALL_ORDER_SUCCESS,
+    ADMIN_ALL_ORDER_REQUEST
 } from "../consents/orderConsent";
 import { disconnect } from "mongoose";
 
@@ -45,14 +48,24 @@ export const getAllOrder = ()  => async(dispatch) =>{
     try{
         dispatch({type: ALL_ORDER_REQUEST});
         const {data} = await axios.get("/api/v1/order/me");
-        dispatch({type:ALL_ORDER_SUCCESS,payload:data});
+        dispatch({type:ALL_ORDER_SUCCESS,payload:data.orders});
     }catch(error) {
         const errorMessage =error.response.data.err;
         dispatch({type: ALL_ORDER_FAIL, payload: errorMessage});
     }
 }
 
-
+export const adminGetAllOrder =()=> async(dispatch)=>{
+    try{
+        dispatch({type:ADMIN_ALL_ORDER_REQUEST});
+        const {data} = await axios.get("/api/v1/order")
+        console.log(data);
+        dispatch({type:ADMIN_ALL_ORDER_SUCCESS,payload:data});
+    }catch(error) {
+        const errorMessage =error.response.data.err;
+        dispatch({type: ADMIN_ALL_ORDER_FAIL, payload: errorMessage});
+    }
+}
 
 export const clearError = () => async (dispatch) => {
     dispatch({type: CLEAR_ERROR});
