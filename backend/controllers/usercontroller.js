@@ -206,7 +206,7 @@ const deleteUser=catchmyerror(async(req,res,next)=>{
     if(!user) {
         return next(new ErrorHandler("user does not exist",400));
     }
-    await user.remove();
+    await user.deleteOne();
     res.status(200).json({
         success:true,
         message:"User deleted successfully"

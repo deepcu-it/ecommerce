@@ -103,7 +103,6 @@ export const UpdatedProduct = (state={loading:true,product:{}},action)=>{
             }
         case UPDATE_PRODUCT_SUCCESS:
             return{
-                ...state,
                 loading:false,
                 isUpdated:true,
                 product:action.payload

@@ -20,8 +20,11 @@ import { USER_FAIL,
      ADMIN_GET_ALL_USER_FAIL,
      ADMIN_GET_ALL_USER_REQUEST,
      ADMIN_GET_ALL_USER_SUCCESS,
+     DELETE_USER_FAIL,
+     DELETE_USER_REQUEST,
+     DELETE_USER_SUCCESS,
      CLEAR_ERROR } from "../consents/userConsent";
-
+import {CANCEL_ORDER_FAIL, CANCEL_ORDER_REQUEST, CANCEL_ORDER_SUCCESS } from "../consents/orderConsent";
 
 export const getUser = (state={loading:true,user:{}},action) => {
     switch (action.type) {
@@ -161,6 +164,39 @@ export const getAllUserReducer = (state={loading:true,users:[]},action)=>{
                 ...state,
                 loading:false,
                 error:action.payload,
+            }
+        case CLEAR_ERROR:
+            return {
+                ...state,
+                error:null
+            }
+        default:
+            return state
+    }
+}
+export const deleteUserReducer = (state={loading:true,isDeleted:false},action)=>{
+    switch (action.type) {
+        case DELETE_USER_REQUEST:
+            case CANCEL_ORDER_REQUEST:
+            return {
+                ...state,
+                loading:true
+
+            }
+        case DELETE_USER_SUCCESS:
+            case CANCEL_ORDER_SUCCESS:
+            return {
+                ...state,
+                loading:false,
+                isDeleted:true
+            }
+        case DELETE_USER_FAIL:
+            case CANCEL_ORDER_FAIL:
+            return {
+                
+                ...state,
+                loading:false,
+                error:action.payload
             }
         case CLEAR_ERROR:
             return {

@@ -14,7 +14,7 @@ import Slider from '@mui/material/Slider';
 const AllProducts = () => {
   const { keyword } = useParams();
   const dispatch = useDispatch();
-  const [selectedPageIndex, setSelectedPageIndex] = useState(null);
+  const [selectedPageIndex, setSelectedPageIndex] = useState(1);
   const [currentPage,setCurrentPage] = useState(1);
   const [price,setPrice] = useState([0,25000]);
   const [sizeOfWindow,setSizeOfWindow] = useState(window.innerWidth);
@@ -52,6 +52,7 @@ useEffect(() => {
   };
   const handlePage= (index) => {
     setCurrentPage(index);
+    //handleMouse(index+1);
   }
   const handlePrice = (event,newPrice) => {
     setPrice(newPrice);
@@ -62,7 +63,7 @@ useEffect(() => {
   };
   
   const paginationBox = (index) => ({
-    backgroundColor: selectedPageIndex === index ? "blue" : "white",
+    backgroundColor:"white",
     color: "black",
     height: "40px",
     maxWidth: "40px",
@@ -135,7 +136,7 @@ const customSearch = {
       <Row style={customPagination}>
         {[...Array(numberOfPages)].map((_, index) => (
 
-          <Col onClick={()=> handlePage(index+1)} key={index} onMouseOver={() => handleMouse(index)} style={paginationBox(index)}>
+          <Col onClick={()=> handlePage(index+1)} key={index} style={paginationBox(index)}>
             {index+1}
           </Col>
         ))}

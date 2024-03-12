@@ -21,7 +21,11 @@ import {
   ADMIN_GET_ALL_USER_FAIL,
   ADMIN_GET_ALL_USER_REQUEST,
   ADMIN_GET_ALL_USER_SUCCESS,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAIL,
 } from "../consents/userConsent.js";
+import { DELETE_PRODUCT_SUCCESS } from "../consents/productConsents.js";
 
 export const getUserDetails = () => async (dispatch) => {
   try {
@@ -182,3 +186,13 @@ export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };
 
+export const deleteUser = (id) => async (dispatch) => {
+  try{
+    dispatch({type:DELETE_USER_REQUEST});
+    const {data} = await axios.delete(`/api/v1/admin/users/${id}`);
+    dispatch({type:DELETE_USER_SUCCESS,payload:data.success});
+  }catch(error){
+    const errorMessage = error.response && error.response.data && error.response.data.err
+    dispatch({type:DELETE_USER_FAIL,payload:errorMessage});
+  }
+}

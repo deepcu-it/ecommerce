@@ -26,6 +26,7 @@ const AdminOrder = () => {
                 {orders.orders.map((order) => (
                     <OrderComponent
                     key={order._id}
+                    _id={order._id}
                     name={order.orderItems[0].name}
                     status={order.orderStatus}
                     price={order.orderItems[0].price}

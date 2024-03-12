@@ -37,10 +37,10 @@ export const placeOrder = (orderItems,user,shippingInfo) => async (dispatch) => 
 export const cancelOrder =(id)=> async(dispatch) =>{
     try{
         dispatch({type:CANCEL_ORDER_REQUEST})
-        await axios.delete(`/api/v1/order/delete/${id}`);
-        dispatch({type:CANCEL_ORDER_SUCCESS})
+        const {data} = await axios.delete(`/api/v1/order/delete/${id}`);
+        dispatch({type:CANCEL_ORDER_SUCCESS,payload:data});
     }catch(error) {
-        dispatch({type: CANCEL_ORDER_FAIL});
+        dispatch({type: CANCEL_ORDER_FAIL,payload:error.response.data.err});
     }
 } 
 

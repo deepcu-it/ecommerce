@@ -6,17 +6,18 @@ import { clearErrors, updateProduct} from "../../../actions/productAction";
 import { Button } from "react-bootstrap";
 import { notify } from "../../notification";
 import Loader from "../../layout/Loader";
-import { getUpdatedProductDetails } from "../../../actions/productAction";
+import { getProductDetails } from "../../../actions/productAction";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   useEffect(() => {
-    dispatch(getUpdatedProductDetails(id));
+    dispatch(getProductDetails(id));
   },[id]);
 
-  const { loading, product,isUpdated, error } = useSelector((state) => state.UpdateProduct);
+  const { loading1, product,error1 } = useSelector((state) => state.productDetails);
+  const { loading2,isUpdated, error2 } = useSelector((state) => state.UpdateProduct);
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
   const [stock, setStock] = useState(product.stock);
@@ -46,8 +47,8 @@ const UpdateProduct = () => {
   }
 
   useEffect(() => {
-    if (error) {
-      notify(error);
+    if (error2) {
+      notify(error2);
       dispatch(clearErrors());
       return;
     }
@@ -55,9 +56,9 @@ const UpdateProduct = () => {
       notify("Product updated successfully")
       navigate("/admin-route");
     }
-  }, [dispatch,error,isUpdated]);
+  }, [dispatch,error2,isUpdated]);
 
-  return loading ? (
+  return loading1 ? (
     <Loader />
   ) : (
     <div>

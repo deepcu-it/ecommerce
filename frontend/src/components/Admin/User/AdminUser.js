@@ -26,6 +26,7 @@ const AdminUser = () => {
                 {users.map((user) => (
                     <UserComponent
                         key={user._id}
+                        _id={user._id}
                         name={user.name}
                         role={user.role}
                         email={user.email}
