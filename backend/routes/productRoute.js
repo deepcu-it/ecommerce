@@ -13,6 +13,8 @@ router.route("/product/:id")
 .delete(isAuthenticatedUser,authorizeRoles("admin"),Deleteproduct);
 
 router.route("/product/:id").get(getproductDetail);
-//router.route("/review").put(isAuthenticatedUser,createProductReview)
-//router.route("/review").get(getProductReview).delete(isAuthenticatedUser,deleteReview);
+router.route("/review")
+.put(isAuthenticatedUser,createProductReview)
+.get(getProductReview)
+.delete(isAuthenticatedUser,deleteReview);
 export default router;

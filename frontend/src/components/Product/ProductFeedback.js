@@ -1,14 +1,30 @@
-// FeedbackCard.js
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ProductFeedback.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { newReview } from '../../actions/productAction';
+import { notify } from '../notification';
 
 const ProductFeedback = () => {
+  const [comment,setComment] = useState("");
+  const {product} = useSelector(state=>state.productDetails);
+  const dispatch=useDispatch();
+  const handleReviewSubmit = ()=>{
+    if(comment.length<5) {
+      notify("Please enter a valid review");
+      return;
+    }
+    dispatch(newReview({rating:5,comment,product_id:product._id}));
+    window.location.reload();
+  }  
+
   return (
     <div className="feedback-card">
-      <h1 className="text-center text-xl font-bold">Send Feedback</h1>
+      <h1 className="text-center text-xl font-bold">Write Review</h1>
+      <h3>Your opinion our first priority</h3>
       <textarea
         className="feedback-textarea"
         placeholder="Your feedback..."
+        onChange={(e)=>setComment(e.target.value)}
       ></textarea>
       <button className="feedback-button">
         <svg viewBox="0 0 512 512" height="20px" xmlns="http://www.w3.org/2000/svg">
@@ -21,7 +37,7 @@ const ProductFeedback = () => {
         </svg>
       </button>
       <span className="col-span-2"></span>
-      <button className="feedback-action-button">
+      <button onClick={handleReviewSubmit} className="feedback-action-button">
         Submit
       </button>
     </div>

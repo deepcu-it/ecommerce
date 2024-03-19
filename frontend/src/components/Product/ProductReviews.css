@@ -6,9 +6,11 @@
     margin: 15px 30px 15px 30px;
     width: 100%;
     height: fit-content;
-    background-color: rgb(151, 74, 119);
+    background-color: #974a77;
     display: flex;
     text-align: justify;
+    border-radius: 20px;
+    border: 5px solid rgb(105, 59, 67);
 }
 .product-review-image {
     border-radius: 50%;

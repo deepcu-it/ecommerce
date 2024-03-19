@@ -26,7 +26,7 @@ const MyOrder = () => {
                             <th>Order</th>
                             <th>status</th> 
                         </tr>
-                        {orders ? orders.orders.map((order,index) => (
+                        {orders ? orders.map((order,index) => (
                             <tr className="order-table-row" key={order._id}>
                                 <td className="order-name-cell">{index+1}. {order.orderItems[0].name}</td>
                                 <td>{order.deliveryAt.slice(0,10)}</td>

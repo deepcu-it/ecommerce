@@ -99,7 +99,7 @@ const createProductReview=catchmyerror(async(req,res,next)=>{
         rating,
         comment
     }
-    const product=await User.findById(product_id);
+    const product=await Product.findById(product_id);
     const isReviewed=product.reviews.find(rev=>rev.user.toString()===req.user.id);
     if(isReviewed) {
         product.reviews.forEach(rev => {

@@ -3,10 +3,8 @@
     background-color: #364d75;
     display: grid;
     border-radius: 11px;
-    grid-template-columns: repeat(6, 1fr);
     gap: 2px;
     padding: 50px 60px 20px 60px;
-    font-size: 14px;
   }
   
   .feedback-card h1 {

@@ -120,7 +120,17 @@ export const deleteProduct = (id) => async (dispatch) => {
     dispatch({type:DELETE_PRODUCT_FAIL,payload:errorMessage});
   }
 }
+export const newReview = (review) => async (dispatch) => {
+  try {
+    dispatch({ type: "PRODUCT_REVIEW_REQUEST" });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put("/api/v1/review", review, config);
+    dispatch({ type: "PRODUCT_REVIEW_SUCCESS"});
 
+  }catch (error) {
+    dispatch({type: "PRODUCT_REVIEW_FAIL"});
+  }
+}
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };
