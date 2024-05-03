@@ -16,7 +16,7 @@ export default (err,req,res,next) => {
         err = new ErrorHandler(message,400);
     }
     if(err.code==11000) {
-        const meassage=`User already exist with this email`;
+        const meassage=`User already exist`;
         err=new ErrorHandler(meassage,400);
     }
 
