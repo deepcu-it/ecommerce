@@ -14,7 +14,6 @@ import {
     ADMIN_ALL_ORDER_SUCCESS,
     ADMIN_ALL_ORDER_REQUEST
 } from "../consents/orderConsent";
-import { disconnect } from "mongoose";
 
 export const placeOrder = (orderItems,user,shippingInfo) => async (dispatch) => {
     try {
