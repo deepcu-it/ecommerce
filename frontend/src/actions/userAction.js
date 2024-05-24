@@ -78,7 +78,7 @@ export const userLogin = (email, password) => async (dispatch) => {
     const errorMessage =
       error.response && error.response.data && error.response.data.err
         ? error.response.data.err
-        : "An error occurred";
+        : "Please login";
 
     dispatch({
       type: USER_FAIL,
@@ -100,7 +100,7 @@ export const userSignUp = (name,phoneNo,email,password) => async (
     const errorMessage =
       error.response && error.response.data && error.response.data.err
         ? error.response.data.err
-        : "An error occurred";
+        : "please SignUp";
 
     dispatch({
       type: USER_FAIL,
