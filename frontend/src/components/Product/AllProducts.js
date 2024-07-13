@@ -110,7 +110,7 @@ const customSearch = {
 
       <Row style={customStyleofRow}>
         {!loading ? (
-          products.length? (
+          products && products.length? (
           products.map((product, index) => (
             <Col>
               <Link to={`/product/${product._id}`} >
