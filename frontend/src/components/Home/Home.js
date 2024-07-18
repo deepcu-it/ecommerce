@@ -34,12 +34,11 @@ function Home() {
 
     const animateBannerTitles = () => {
         let index = 0;
-        const intervalId = setInterval(() => {
+        setInterval(() => {
             setBannerText(bannerTitles[index]);
             index = (index + 1) % bannerTitles.length;
         }, 6000);
-
-        return () => clearInterval(intervalId);
+  
     };
 
     return (

@@ -3,11 +3,10 @@ import { useSelector } from "react-redux";
 import { Navigate, Routes, Route } from "react-router-dom";
 import Loader from "../layout/Loader";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+const ProtectedRoute = ({ component:Component, ...rest }) => {
     const { loading, isAuthenticated } = useSelector((state) => state.user);
 
     if (loading) {
-        // You might want to render a loading indicator here
         return <Loader/>;
     }
 
@@ -17,11 +16,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
                 <Route
                     {...rest}
                     element={
-                        isAuthenticated ? (
-                            <Component />
-                        ) : (
-                            <Navigate to="/login" replace />
-                        )
+                        isAuthenticated ? <Component /> : <Navigate to="/login" replace />    
                     }
                 />
             )}

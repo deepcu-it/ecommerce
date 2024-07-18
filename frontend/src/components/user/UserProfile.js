@@ -1,12 +1,9 @@
-import react, { useEffect } from "react";
 import "./userProfile.css"
 import {Button, Col, Image, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { notify,ToastContainer } from "../notification.js";
 import Loader from "../layout/Loader.js";
 import { Link } from "react-router-dom";
-const img1 = "https://buffer.com/cdn-cgi/image/w=1000,fit=contain,q=90,f=auto/library/content/images/size/w1200/2023/10/free-images.jpg";
-
+import ProfileImg from "./Profile.jpg";
 const UserProfile = ()=> {
     const {loading,user,isAuthenticated} = useSelector((state)=>state.user);
     
@@ -36,9 +33,9 @@ const UserProfile = ()=> {
             <div style={{height:"100px"}}></div>
             <h1 className="page-title">My Profile</h1>
             <Col style={customCol}>
-                <div><img src={img1} className="user-image" /></div>
+                <div><img src={ProfileImg} alt="Profile-pic" className="user-image" /></div>
                 <Link to={"/account/update"}><Button style={customButton}>Edit Profile</Button></Link>
-                {user.role=="admin" && <Link to={"/admin-route"}><Button style={customButton}>Admin Config</Button></Link>}
+                {user && user.role==="admin" && <Link to={"/admin-route"}><Button style={customButton}>Admin Config</Button></Link>}
             </Col>
             <Col style={customCol2}>
             <div className="user">
@@ -57,7 +54,6 @@ const UserProfile = ()=> {
             <Link to={"/account/update/password"}><Button style={customButton}>Change Password</Button></Link>
             </Col>
             <div style={{height:"100px"}}></div>
-            <ToastContainer/>
         </Row>
     )
 }

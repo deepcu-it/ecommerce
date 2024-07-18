@@ -28,7 +28,7 @@ const ForgotPassword = () => {
   const {loading,error,isForgotted} = useSelector((state) => state.forgotPassword);
   useEffect(()=>{
     if(error) {
-      notify(error);
+      notify("Email not found");
       dispatch(clearErrors());
     }
     if(isForgotted) {

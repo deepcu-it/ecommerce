@@ -6,7 +6,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { logoutUser } from "../../actions/userAction.js";
 import {notify, ToastContainer} from "../notification.js";
 import {useNavigate} from "react-router-dom";
-
+import ProfileImg from "../user/Profile.jpg";
 function Header() {
   const navref=useRef();
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function Header() {
               <a href="/about" >About Us <span><RiArrowDropDownLine style={customDownLine}/></span></a>
               <a onClick={isAuthenticated ? logoutSubmit:gotoLogin}>{loginToggle}<span><TbLogout style={{cursor:"pointer",height:"23px",width:"27px"}}/></span></a>
               <a href="/me/cart"><FaShoppingCart style={{cursor:"pointer",height:"27px",width:"32px"}}/></a>
-              <a href="/account"><img src="../components/user/Profile.png" className="user-profile"/></a>
+              <a href="/account"><img src={ProfileImg} className="user-profile"/></a>
               <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                 <FaTimes/>
               </button>
