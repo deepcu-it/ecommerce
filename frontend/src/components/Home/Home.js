@@ -53,7 +53,7 @@ function Home() {
                     <Loader />
                 ) : error ? (
                     "Error loading products"
-                ) : products.length > 0 ? (
+                ) : products && products.length > 0 ? (
                     products.map(product => (
                         <Product
                             key={product._id}
