@@ -39,6 +39,7 @@ export const getUserDetails = () => async (dispatch) => {
       payload: data.user,
     });
   } catch (error) {
+    console.log(error)
     const errorMessage =
       error.response && error.response.data && error.response.data.message
         ? error.response.data.message
