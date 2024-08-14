@@ -5,7 +5,7 @@ import User from "../models/usermodel.js";
 
 
 const isAuthenticatedUser = catchmyerror (async (req,res,next) => {
-    const token=req.headers['Authorization'];
+    const token=req.headers['authorization'];
     console.log(token);
     
     if(!token) {
