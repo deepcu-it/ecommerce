@@ -27,10 +27,13 @@ import {
 } from "../consents/userConsent.js";
 import { DELETE_PRODUCT_SUCCESS } from "../consents/productConsents.js";
 
+const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
+
+// Get User Details
 export const getUserDetails = () => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_USER_REQUEST });
-    const { data } = await axios.get(`/api/v1/me`);
+    const { data } = await axios.get(`${baseURL}/me`);
     dispatch({
       type: LOGIN_USER_SUCCESS,
       payload: data.user,
@@ -47,11 +50,11 @@ export const getUserDetails = () => async (dispatch) => {
     });
   }
 };
-export const logoutUser= () => async (dispatch) => {
-  let apiUri= "https://ecommerce-bytb.onrender.com"
 
+// Logout User
+export const logoutUser = () => async (dispatch) => {
   try {
-    await axios.get(`${apiUri}/api/v1/Logout`);
+    await axios.get(`${baseURL}/Logout`);
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     const errorMessage =
@@ -66,14 +69,13 @@ export const logoutUser= () => async (dispatch) => {
   }
 };
 
+// User Login
 export const userLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_REQUEST });
     const config = { headers: { "Content-type": "application/json" } };
-  let apiUri= "https://ecommerce-bytb.onrender.com"
-
     const { data } = await axios.post(
-      `${apiUri}/api/v1/login`,
+      `${baseURL}/login`,
       { email, password },
       config
     );
@@ -91,20 +93,22 @@ export const userLogin = (email, password) => async (dispatch) => {
   }
 };
 
-export const userSignUp = (name,phoneNo,email,password) => async (
-  dispatch
-) => {
+// User Sign Up
+export const userSignUp = (name, phoneNo, email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_REQUEST });
     const config = { headers: { "Content-type": "application/json" } };
-    const { data } = await axios.post("/api/v1/register", {name,phoneNo,email,password},config);
-
+    const { data } = await axios.post(
+      `${baseURL}/register`,
+      { name, phoneNo, email, password },
+      config
+    );
     dispatch({ type: USER_SUCCESS, payload: data.user });
   } catch (error) {
     const errorMessage =
       error.response && error.response.data && error.response.data.err
         ? error.response.data.err
-        : "please SignUp";
+        : "Please SignUp";
 
     dispatch({
       type: USER_FAIL,
@@ -113,12 +117,16 @@ export const userSignUp = (name,phoneNo,email,password) => async (
   }
 };
 
-export const updateProfile = (name,phoneNo,newEmail,oldEmail,password) => async (dispatch) => {
+// Update Profile
+export const updateProfile = (name, phoneNo, newEmail, oldEmail, password) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_USER_REQUEST });
     const config = { headers: { "Content-type": "application/json" } };
-    const { data } = await axios.put("/api/v1/me/update", {name,phoneNo,newEmail,oldEmail,password},config);
-
+    const { data } = await axios.put(
+      `${baseURL}/me/update`,
+      { name, phoneNo, newEmail, oldEmail, password },
+      config
+    );
     dispatch({ type: UPDATE_USER_SUCCESS, payload: data.success });
   } catch (error) {
     const errorMessage =
@@ -132,17 +140,17 @@ export const updateProfile = (name,phoneNo,newEmail,oldEmail,password) => async 
     });
   }
 };
-export const updatePassword = (oldpassword, newpassword,confirmpassword) => async (dispatch) => {
+
+// Update Password
+export const updatePassword = (oldPassword, newPassword, confirmPassword) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PASSWORD_REQUEST });
-
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.put(
-      "/api/v1/password/update",
-      { oldpassword, newpassword,confirmpassword },
+      `${baseURL}/password/update`,
+      { oldPassword, newPassword, confirmPassword },
       config
     );
-
     dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success });
   } catch (error) {
     const errorMessage =
@@ -156,47 +164,66 @@ export const updatePassword = (oldpassword, newpassword,confirmpassword) => asyn
     });
   }
 };
+
+// Forgot Password
 export const forgetPassword = (email) => async (dispatch) => {
   try {
-    dispatch({type:FORGOT_PASSWORD_REQUEST});
+    dispatch({ type: FORGOT_PASSWORD_REQUEST });
     const config = { headers: { "Content-type": "application/json" } };
-    const {data} = await axios.post("/api/v1/password/forgot",{email},config);
-    dispatch({type:FORGOT_PASSWORD_SUCCESS,payload:data.success});
-  }catch(error)  {
-    console.log(`first errror  ${error}`);
+    const { data } = await axios.post(
+      `${baseURL}/password/forgot`,
+      { email },
+      config
+    );
+    dispatch({ type: FORGOT_PASSWORD_SUCCESS, payload: data.success });
+  } catch (error) {
     const errorMessage =
-    error.response && error.response.data && error.response.data.err
-      ? error.response.data.err
-      : error.message || "An error occurred";
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : error.message || "An error occurred";
 
-  dispatch({
-    type: FORGOT_PASSWORD_FAIL,
-    payload: errorMessage,
-  });
+    dispatch({
+      type: FORGOT_PASSWORD_FAIL,
+      payload: errorMessage,
+    });
   }
-}
+};
 
-export const getAllUser =()=> async(dispatch)=>{
-try{
-  dispatch({type:ADMIN_GET_ALL_USER_REQUEST});
-  const {data} = await axios.get("/api/v1/admin/users");
-  dispatch({type:ADMIN_GET_ALL_USER_SUCCESS,payload:data.user});
-  }catch(error) {
+// Get All Users (Admin)
+export const getAllUser = () => async (dispatch) => {
+  try {
+    dispatch({ type: ADMIN_GET_ALL_USER_REQUEST });
+    const { data } = await axios.get(`${baseURL}/admin/users`);
+    dispatch({ type: ADMIN_GET_ALL_USER_SUCCESS, payload: data.user });
+  } catch (error) {
     const errorMessage = error.response && error.response.data && error.response.data.err
-    dispatch({type:ADMIN_GET_ALL_USER_FAIL,payload:errorMessage});
+      ? error.response.data.err
+      : "An error occurred";
+
+    dispatch({ type: ADMIN_GET_ALL_USER_FAIL, payload: errorMessage });
   }
-}
+};
+
+// Clear Errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };
 
+// Delete User (Admin)
 export const deleteUser = (id) => async (dispatch) => {
-  try{
-    dispatch({type:DELETE_USER_REQUEST});
-    const {data} = await axios.delete(`/api/v1/admin/users/${id}`);
-    dispatch({type:DELETE_USER_SUCCESS,payload:data.success});
-  }catch(error){
-    const errorMessage = error.response && error.response.data && error.response.data.err
-    dispatch({type:DELETE_USER_FAIL,payload:errorMessage});
+  try {
+    dispatch({ type: DELETE_USER_REQUEST });
+    const { data } = await axios.delete(`${baseURL}/admin/users/${id}`);
+    dispatch({ type: DELETE_USER_SUCCESS, payload: data.success });
+  } catch (error) {
+    const errorMessage =
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : "An error occurred";
+
+    dispatch({
+      type: DELETE_USER_FAIL,
+      payload: errorMessage,
+    });
   }
-}
+};
