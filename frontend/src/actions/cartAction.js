@@ -6,7 +6,14 @@ const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
 
 // Add to Cart
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
-    const { data } = await axios.get(`${baseURL}/product/${id}`);
+    const token = localStorage.getItem("token");
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    };
+    const { data } = await axios.get(`${baseURL}/product/${id}`,config);
     dispatch({
         type: ADD_TO_CART,
         payload: {

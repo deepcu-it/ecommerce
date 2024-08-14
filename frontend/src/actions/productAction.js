@@ -24,21 +24,25 @@ const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
 export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000]) => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
+    const token = localStorage.getItem("token");
     let link = `${baseURL}/products?keyword=${keyword}&page=${currentPage}`;
     if (price && price[0] !== undefined && price[1] !== undefined) {
       link += `&price[gte]=${price[0]}&price[lte]=${price[1]}`;
     }
 
-    const { data } = await axios.get(link);
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get(link, config);
     dispatch({
       type: ALL_PRODUCT_SUCCESS,
       payload: data,
     });
   } catch (error) {
-    const errorMessage =
-      error.response && error.response.data && error.response.data.message
-        ? error.response.data.message
-        : "An error occurred";
+    const errorMessage = error.message;
 
     dispatch({
       type: ALL_PRODUCT_FAIL,
@@ -51,16 +55,21 @@ export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000]) =>
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-    const { data } = await axios.get(`${baseURL}/product/${id}`);
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.get(`${baseURL}/product/${id}`, config);
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data.product,
     });
   } catch (error) {
-    const errorMessage =
-      error.response && error.response.data && error.response.data.message
-        ? error.response.data.message
-        : "An error occurred";
+    const errorMessage = error.message;
 
     dispatch({
       type: PRODUCT_DETAILS_FAIL,
@@ -69,37 +78,48 @@ export const getProductDetails = (id) => async (dispatch) => {
   }
 };
 
-// Create New Product
 export const createNewProduct = (product) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_PRODUCT_REQUEST });
-    const config = { headers: { "Content-Type": "application/json" } };
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     const { data } = await axios.post(`${baseURL}/product/new`, product, config);
     dispatch({ type: CREATE_PRODUCT_SUCCESS, payload: data.product });
   } catch (error) {
-    const errorMessage =
-      error.response && error.response.data && error.response.data.err
-        ? error.response.data.err
-        : "An error occurred";
+    const errorMessage = error.message;
+
     dispatch({ type: CREATE_PRODUCT_FAIL, payload: errorMessage });
   }
 };
 
-// Update Product
+
 export const updateProduct = (id, product) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
-    const config = { headers: { "Content-Type": "application/json" } };
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     const { data } = await axios.put(`${baseURL}/product/${id}`, product, config);
     dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: data.product });
   } catch (error) {
-    const errorMessage =
-      error.response && error.response.data && error.response.data.err
-        ? error.response.data.err
-        : "An error occurred";
+    const errorMessage = error.message;
     dispatch({ type: UPDATE_PRODUCT_FAIL, payload: errorMessage });
   }
 };
+
 
 // Get Updated Product Details
 export const getUpdatedProductDetails = (id) => async (dispatch) => {
@@ -111,11 +131,7 @@ export const getUpdatedProductDetails = (id) => async (dispatch) => {
       payload: data.product,
     });
   } catch (error) {
-    const errorMessage =
-      error.response && error.response.data && error.response.data.message
-        ? error.response.data.message
-        : "An error occurred";
-
+    const errorMessage = error.message;
     dispatch({
       type: UPDATE_PRODUCT_FAIL,
       payload: errorMessage,
@@ -127,28 +143,43 @@ export const getUpdatedProductDetails = (id) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   try {
     dispatch({ type: DELETE_PRODUCT_REQUEST });
-    const { data } = await axios.delete(`${baseURL}/product/${id}`);
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.delete(`${baseURL}/product/${id}`, config);
     dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success });
   } catch (error) {
-    const errorMessage =
-      error.response && error.response.data && error.response.data.err
-        ? error.response.data.err
-        : "An error occurred";
+    const errorMessage = error.message;
     dispatch({ type: DELETE_PRODUCT_FAIL, payload: errorMessage });
   }
 };
+
 
 // New Review
 export const newReview = (review) => async (dispatch) => {
   try {
     dispatch({ type: "PRODUCT_REVIEW_REQUEST" });
-    const config = { headers: { "Content-Type": "application/json" } };
+    const token = localStorage.getItem("token");
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
     await axios.put(`${baseURL}/review`, review, config);
     dispatch({ type: "PRODUCT_REVIEW_SUCCESS" });
   } catch (error) {
     dispatch({ type: "PRODUCT_REVIEW_FAIL" });
   }
 };
+
 
 // Clear Errors
 export const clearErrors = () => async (dispatch) => {

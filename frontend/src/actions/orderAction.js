@@ -21,73 +21,96 @@ const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
 export const placeOrder = (orderItems, user, shippingInfo) => async (dispatch) => {
     try {
         dispatch({ type: PLACE_ORDER_REQUEST });
+        const token = localStorage.getItem("token");
+
         const config = {
             headers: {
-                "Content-Type": "application/json"
-            }
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
         };
+
         const { data } = await axios.post(`${baseURL}/order/new`, { orderItems, user, shippingInfo }, config);
         dispatch({ type: PLACE_ORDER_SUCCESS, payload: data });
 
     } catch (error) {
         dispatch({
             type: PLACE_ORDER_FAIL,
-            payload: error.response && error.response.data && error.response.data.err
-                ? error.response.data.err
-                : "An error occurred"
+            payload: error.message
         });
     }
-}
+};
 
 // Cancel Order
 export const cancelOrder = (id) => async (dispatch) => {
     try {
         dispatch({ type: CANCEL_ORDER_REQUEST });
-        const { data } = await axios.delete(`${baseURL}/order/delete/${id}`);
+        const token = localStorage.getItem("token");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        const { data } = await axios.delete(`${baseURL}/order/delete/${id}`, config);
         dispatch({ type: CANCEL_ORDER_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
             type: CANCEL_ORDER_FAIL,
-            payload: error.response && error.response.data && error.response.data.err
-                ? error.response.data.err
-                : "An error occurred"
+            payload: error.message
         });
     }
-}
+};
+
 
 // Get All Orders for User
 export const getAllOrder = () => async (dispatch) => {
     try {
         dispatch({ type: ALL_ORDER_REQUEST });
-        const { data } = await axios.get(`${baseURL}/order/me`);
+        const token = localStorage.getItem("token");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        const { data } = await axios.get(`${baseURL}/order/me`, config);
         dispatch({ type: ALL_ORDER_SUCCESS, payload: data.orders });
     } catch (error) {
         dispatch({
             type: ALL_ORDER_FAIL,
-            payload: error.response && error.response.data && error.response.data.err
-                ? error.response.data.err
-                : "An error occurred"
+            payload: error.message
         });
     }
-}
+};
+
 
 // Get All Orders for Admin
 export const adminGetAllOrder = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_ALL_ORDER_REQUEST });
-        const { data } = await axios.get(`${baseURL}/order`);
+        const token = localStorage.getItem("token");
+
+        const config = {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+
+        const { data } = await axios.get(`${baseURL}/order`, config);
         dispatch({ type: ADMIN_ALL_ORDER_SUCCESS, payload: data });
     } catch (error) {
         dispatch({
             type: ADMIN_ALL_ORDER_FAIL,
-            payload: error.response && error.response.data && error.response.data.err
-                ? error.response.data.err
-                : "An error occurred"
+            payload: error.message
         });
     }
-}
+};
+
 
 // Clear Errors
 export const clearError = () => async (dispatch) => {
     dispatch({ type: CLEAR_ERROR });
-}
+};

@@ -3,7 +3,6 @@ import { getAllproducts,createProduct, Updateproduct,
      Deleteproduct, getproductDetail, 
      createProductReview, getProductReview, deleteReview } from "../controllers/productcontroller.js";
 import { isAuthenticatedUser,  authorizeRoles } from "../middleware/auth.js";
-import { getallUser } from "../controllers/usercontroller.js";
 
 const router=express.Router();
 router.route("/products").get(getAllproducts);

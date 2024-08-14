@@ -4,7 +4,6 @@ import catchmyerror from "../middleware/catchmyerror.js";
 import sendToken from "../utils/jwtToken.js";
 import sendEmail from "../utils/sendEmail.js";
 import crypto from "crypto"
-//Register a user 
 
 const RegisteredUser = catchmyerror(async (req,res,next) => {
     const {name,phoneNo,email,password} = req.body;
@@ -30,10 +29,7 @@ const loginuser= catchmyerror (async (req,res,next) => {
     if(!email || !password) {
         return next(new ErrorHandler("Please Enter email or password",400));
     }
-
-    const user =await User.findOne({email:email}).select("+password");
-
-
+    const user = await User.findOne({email:email}).select("+password");
     if(!user) {
         return next(new ErrorHandler("Invalid email or password",401));
     }
@@ -47,11 +43,7 @@ const loginuser= catchmyerror (async (req,res,next) => {
 
 //logout
 const logout=catchmyerror(async (req,res,next)=>{
-    res.cookie("token",null,{
-        expires:new Date(Date.now()),
-        httpOnly:true,
-    })
-
+    
     res.status(200).json({
         success:true,
         meassage:"Logged out "
