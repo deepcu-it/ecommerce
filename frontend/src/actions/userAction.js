@@ -70,8 +70,10 @@ export const userLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_REQUEST });
     const config = { headers: { "Content-type": "application/json" } };
+  let apiUri= "https://ecommerce-bytb.onrender.com"
+
     const { data } = await axios.post(
-      "/api/v1/login",
+      `${apiUri}/api/v1/login`,
       { email, password },
       config
     );
