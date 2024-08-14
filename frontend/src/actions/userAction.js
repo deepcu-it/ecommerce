@@ -48,8 +48,10 @@ export const getUserDetails = () => async (dispatch) => {
   }
 };
 export const logoutUser= () => async (dispatch) => {
+  let apiUri= "https://ecommerce-bytb.onrender.com"
+
   try {
-    await axios.get(`/api/v1/Logout`);
+    await axios.get(`${apiUri}/api/v1/Logout`);
     dispatch({ type: LOGOUT_SUCCESS });
   } catch (error) {
     const errorMessage =
