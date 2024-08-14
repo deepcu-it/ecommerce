@@ -3,7 +3,6 @@ import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
-
   PRODUCT_DETAILS_FAIL,
   PRODUCT_DETAILS_REQUEST,
   PRODUCT_DETAILS_SUCCESS,
@@ -18,10 +17,14 @@ import {
   DELETE_PRODUCT_SUCCESS,
   DELETE_PRODUCT_REQUEST,
 } from "../consents/productConsents.js";
-export const getProduct = (keyword="",currentPage=1,price= [0,25000]) => async (dispatch) => {
+
+const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
+
+// Get Products
+export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000]) => async (dispatch) => {
   try {
     dispatch({ type: ALL_PRODUCT_REQUEST });
-    let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}`;
+    let link = `${baseURL}/products?keyword=${keyword}&page=${currentPage}`;
     if (price && price[0] !== undefined && price[1] !== undefined) {
       link += `&price[gte]=${price[0]}&price[lte]=${price[1]}`;
     }
@@ -32,7 +35,6 @@ export const getProduct = (keyword="",currentPage=1,price= [0,25000]) => async (
       payload: data,
     });
   } catch (error) {
-    // Check if error.response exists and has data property before accessing its message
     const errorMessage =
       error.response && error.response.data && error.response.data.message
         ? error.response.data.message
@@ -45,10 +47,11 @@ export const getProduct = (keyword="",currentPage=1,price= [0,25000]) => async (
   }
 };
 
+// Get Product Details
 export const getProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: PRODUCT_DETAILS_REQUEST });
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    const { data } = await axios.get(`${baseURL}/product/${id}`);
     dispatch({
       type: PRODUCT_DETAILS_SUCCESS,
       payload: data.product,
@@ -66,34 +69,43 @@ export const getProductDetails = (id) => async (dispatch) => {
   }
 };
 
-export const createNewProduct = (product)=>async (dispatch)=>{
+// Create New Product
+export const createNewProduct = (product) => async (dispatch) => {
   try {
-    dispatch({type:CREATE_PRODUCT_REQUEST})
-    const config = {headers:{"Content-Type":"application/json"}}
-    const {data} = await axios.post("/api/v1/product/new",product,config);
-    dispatch({type:CREATE_PRODUCT_SUCCESS,payload:data.product});
-    
-  }catch(error) {
-    const errorMessage = error.response && error.response.data && error.response.data.err;
-    dispatch({type:CREATE_PRODUCT_FAIL,payload:errorMessage});
+    dispatch({ type: CREATE_PRODUCT_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.post(`${baseURL}/product/new`, product, config);
+    dispatch({ type: CREATE_PRODUCT_SUCCESS, payload: data.product });
+  } catch (error) {
+    const errorMessage =
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : "An error occurred";
+    dispatch({ type: CREATE_PRODUCT_FAIL, payload: errorMessage });
   }
-}
-export const updateProduct = (id,product)=>async (dispatch)=>{
-  try{
-    dispatch({type:UPDATE_PRODUCT_REQUEST});
-    const config = {headers:{"Content-Type":"application/json"}}
-    const {data} = await axios.put(`/api/v1/product/${id}`,product,config);
-    dispatch({type:UPDATE_PRODUCT_SUCCESS,payload:data.product});
+};
 
-  }catch(error) {
-    const errorMessage = error.response && error.response.data && error.response.data.err;
-    dispatch({type:UPDATE_PRODUCT_FAIL,payload:errorMessage});
+// Update Product
+export const updateProduct = (id, product) => async (dispatch) => {
+  try {
+    dispatch({ type: UPDATE_PRODUCT_REQUEST });
+    const config = { headers: { "Content-Type": "application/json" } };
+    const { data } = await axios.put(`${baseURL}/product/${id}`, product, config);
+    dispatch({ type: UPDATE_PRODUCT_SUCCESS, payload: data.product });
+  } catch (error) {
+    const errorMessage =
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : "An error occurred";
+    dispatch({ type: UPDATE_PRODUCT_FAIL, payload: errorMessage });
   }
-}
+};
+
+// Get Updated Product Details
 export const getUpdatedProductDetails = (id) => async (dispatch) => {
   try {
     dispatch({ type: UPDATE_PRODUCT_REQUEST });
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    const { data } = await axios.get(`${baseURL}/product/${id}`);
     dispatch({
       type: UPDATE_PRODUCT_SUCCESS,
       payload: data.product,
@@ -110,27 +122,35 @@ export const getUpdatedProductDetails = (id) => async (dispatch) => {
     });
   }
 };
+
+// Delete Product
 export const deleteProduct = (id) => async (dispatch) => {
-  try{
-    dispatch({type:DELETE_PRODUCT_REQUEST});
-    const {data} = await axios.delete(`/api/v1/product/${id}`);
-    dispatch({type:DELETE_PRODUCT_SUCCESS,payload:data.success});
-  }catch(error) {
-    const errorMessage = error.response && error.response.data && error.response.data.err;
-    dispatch({type:DELETE_PRODUCT_FAIL,payload:errorMessage});
+  try {
+    dispatch({ type: DELETE_PRODUCT_REQUEST });
+    const { data } = await axios.delete(`${baseURL}/product/${id}`);
+    dispatch({ type: DELETE_PRODUCT_SUCCESS, payload: data.success });
+  } catch (error) {
+    const errorMessage =
+      error.response && error.response.data && error.response.data.err
+        ? error.response.data.err
+        : "An error occurred";
+    dispatch({ type: DELETE_PRODUCT_FAIL, payload: errorMessage });
   }
-}
+};
+
+// New Review
 export const newReview = (review) => async (dispatch) => {
   try {
     dispatch({ type: "PRODUCT_REVIEW_REQUEST" });
     const config = { headers: { "Content-Type": "application/json" } };
-    const { data } = await axios.put("/api/v1/review", review, config);
-    dispatch({ type: "PRODUCT_REVIEW_SUCCESS"});
-
-  }catch (error) {
-    dispatch({type: "PRODUCT_REVIEW_FAIL"});
+    await axios.put(`${baseURL}/review`, review, config);
+    dispatch({ type: "PRODUCT_REVIEW_SUCCESS" });
+  } catch (error) {
+    dispatch({ type: "PRODUCT_REVIEW_FAIL" });
   }
-}
+};
+
+// Clear Errors
 export const clearErrors = () => async (dispatch) => {
   dispatch({ type: CLEAR_ERROR });
 };

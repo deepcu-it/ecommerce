@@ -1,8 +1,12 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../consents/cartConsents";
 import axios from "axios";
 
+// Centralized API base URL
+const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
+
+// Add to Cart
 export const addToCart = (id, quantity) => async (dispatch, getState) => {
-    const { data } = await axios.get(`/api/v1/product/${id}`);
+    const { data } = await axios.get(`${baseURL}/product/${id}`);
     dispatch({
         type: ADD_TO_CART,
         payload: {
@@ -11,20 +15,19 @@ export const addToCart = (id, quantity) => async (dispatch, getState) => {
             price: data.product.price,
             image: data.product.images.url,
             stock: data.product.stock,
-            description:data.product.description,
-            reviewCount:data.product.reviewCount,
+            description: data.product.description,
+            reviewCount: data.product.reviewCount,
             quantity,
         },
     });
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
-
-export const removeFromCart = (productId) => (dispatch,getState)=>{
+// Remove from Cart
+export const removeFromCart = (productId) => (dispatch, getState) => {
     dispatch({
-      type: REMOVE_FROM_CART,
-      payload: productId,
-    })
+        type: REMOVE_FROM_CART,
+        payload: productId,
+    });
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
-  };
-  
+};
