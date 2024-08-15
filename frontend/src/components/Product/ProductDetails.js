@@ -11,9 +11,6 @@ import { notify, ToastContainer } from "../notification.js";
 import { addToCart } from "../../actions/cartAction.js";
 import "./ProductDetails.css";
 
-const img1 = "https://i.pinimg.com/236x/dc/d4/0d/dcd40d9a7f9cf6a52e6cd4b2b93b15f6.jpg";
-const img2 = "https://5.imimg.com/data5/SELLER/Default/2021/7/ZW/DY/RA/133215290/mens-wear.jpg";
-const img3 = "https://www.realmenrealstyle.com/wp-content/uploads/2023/09/man-dress-for-age.jpg";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -51,7 +48,7 @@ const ProductDetails = () => {
       <div className="height1"></div>
       <div className="product-image-container">
       <div className="carousel-container">
-        <img src={img3} className="carousel-image" alt="Product Image" />
+        <img src={product.images && product.images.url} className="carousel-image" alt="Product Image" />
       </div>
       <div className="product-info-container">
         {!loading ? (
@@ -62,7 +59,7 @@ const ProductDetails = () => {
             </div>
             <div className="product-rating">
               <ReactStars count={5} size={24} activeColor="#ffd700" value={4} />
-              <span className="review-count">{`${product.reviewCount} Reviews`}</span>
+              <span className="review-count">{`${product.numofreviews} Reviews`}</span>
             </div>
             <div className="buttons-container">
               <button onClick={handleAddToCart} className={`add-to-cart-button`}>
