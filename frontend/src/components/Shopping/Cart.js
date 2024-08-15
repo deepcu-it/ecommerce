@@ -15,8 +15,8 @@ const UserCart = () => {
                 name={Item.name}
                 price={Item.price}
                 description={Item.description}
-                images={Item.image}
-                reviewCount={Item.reviewCount}
+                image={Item.image}
+                reviewCount={Item.numofreview}
                 stock={Item.stock}
               />
               

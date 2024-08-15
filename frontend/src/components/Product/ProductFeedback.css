@@ -1,8 +1,9 @@
 /* FeedbackCard.css */
 .feedback-card {
     background-color: #364d75;
-    display: grid;
+    display: flex;
     border-radius: 11px;
+    flex-direction: column;
     gap: 2px;
     padding: 50px 60px 20px 60px;
   }
@@ -70,4 +71,8 @@
     color: #000000;
     background-color: #4299e1;
   }
-  
+  @media (max-width:600px) {
+   .feedback-card {
+      padding: 25px 30px 10px 30px;
+    }
+  }

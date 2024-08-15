@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 const CartComponent = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const img1= "https://i.pinimg.com/236x/dc/d4/0d/dcd40d9a7f9cf6a52e6cd4b2b93b15f6.jpg"
   const handleDeleteFromCart = () => {
     dispatch(removeFromCart(props.id));
     notify("Product Deleted from cart");
@@ -20,7 +19,7 @@ const CartComponent = (props) => {
   return (
     <div className="cart-card">
       <div className="cart-image-container">
-        <img src={img1} alt={props.name} className="cart-image" />
+        <img src={props.image} alt={props.name} className="cart-image" />
       </div>
       <div className="cart-details">
         <div className="cart-info">
