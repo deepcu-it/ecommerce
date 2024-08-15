@@ -11,7 +11,6 @@ import "./product.css";
 const Product = (props) => {
   const [isMouseHovered, setMouseHovered] = useState(false);
   const dispatch = useDispatch();
-  const img1= "https://i.pinimg.com/236x/dc/d4/0d/dcd40d9a7f9cf6a52e6cd4b2b93b15f6.jpg"
 
   const handleAddToCart = () => {
     const quantity = 1;
@@ -25,9 +24,8 @@ const Product = (props) => {
       onMouseOut={() => setMouseHovered(false)}
       className="product-card" 
     >
-      <ToastContainer />
       <Link to={`/product/${props.P_id}`}>
-        <img className="product-image" src={img1} alt={props.name} />
+        <img className="product-image" src={props.image.url} alt={props.name} />
       </Link>
       <div style={{ padding: '10px' }}>
         <div className="product-info">
