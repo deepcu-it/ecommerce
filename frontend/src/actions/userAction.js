@@ -43,7 +43,6 @@ export const getUserDetails = () => async (dispatch) => {
     };
     
     const { data } = await axios.get(`${baseURL}/me`, config);
-    console.log(data.user);
     
     dispatch({
       type: LOGIN_USER_SUCCESS,

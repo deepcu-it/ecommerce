@@ -78,8 +78,8 @@ const CreateProduct = () =>{
                             </div>
 
                     </div>
-                    <Button onClick={handleCreateProduct}>Create product</Button>
                 </div>
+                <Button onClick={handleCreateProduct}>Create product</Button>
             </div>
             <div className="height1"></div>
         </div>
