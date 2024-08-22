@@ -78,7 +78,7 @@ const getproductDetail= catchmyerror(async (req,res,next) => {
 
 //user
 const getAllproducts = catchmyerror(async (req,res) => {
-    var resultperPage=4;
+    var resultperPage=6;
     const productCount=await Product.countDocuments();
     const apifeatures= new Apifeatures(Product.find(),req.query)
     .search().filter().pagination(resultperPage);
