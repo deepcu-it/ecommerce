@@ -23,7 +23,7 @@ const AdminGetAllProducts = (props) => {
     return (
         loading?<Loader/>:<div className="admin-product-details-container">
             <div className="admin-product-image-container">
-                <img className="admin-product-image" src="https://i.pinimg.com/236x/dc/d4/0d/dcd40d9a7f9cf6a52e6cd4b2b93b15f6.jpg" alt="product" />
+                <img className="admin-product-image" src={props.image.url} alt="product" />
             </div>
             <div className="admin-product-get-details">
                 <div className="admin-product-details-heading">

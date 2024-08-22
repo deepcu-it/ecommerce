@@ -59,6 +59,7 @@ const AdminProduct = () => {
               price={product.price}
               description={product.description}
               rating={product.rating}
+              image={product.images}
             />
           ))}
         <Row style={customPagination}>
