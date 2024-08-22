@@ -7,10 +7,10 @@ import User from "../models/usermodel.js";
 const isAuthenticatedUser = catchmyerror (async (req,res,next) => {
     const token=req.headers['authorization'];
     if(token) token = token.split(" ")[1];
-    
-    if(!token) {
+    else {
         return next(new ErrorHandler("please login to access",401));
     }
+    
     const decodedData = jwt.verify(token,process.env.JWT_SECRET);
     req.user = await User.findById(decodedData.id);
     next();
