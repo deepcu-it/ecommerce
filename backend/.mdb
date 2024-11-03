@@ -1,0 +1,10 @@
+{
+  "projectName": "ecommerce-store-backend-api",
+  "meta": {
+    "type": "backend"
+  },
+  "backend": {
+    "platform": "node17"
+  },
+  "hash": "190c998b"
+}

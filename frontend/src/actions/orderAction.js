@@ -15,7 +15,7 @@ import {
     ADMIN_ALL_ORDER_REQUEST
 } from "../consents/orderConsent";
 
-const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
+const baseURL = "https://sts3-ecommerce-store-backend-api.mdbgo.io/api/v1";
 
 // Place Order
 export const placeOrder = (orderItems, user, shippingInfo) => async (dispatch) => {

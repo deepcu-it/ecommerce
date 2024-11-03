@@ -18,7 +18,7 @@ import {
   DELETE_PRODUCT_REQUEST,
 } from "../consents/productConsents.js";
 
-const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
+const baseURL = "https://sts3-ecommerce-store-backend-api.mdbgo.io/api/v1";
 
 // Get Products
 export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000]) => async (dispatch) => {

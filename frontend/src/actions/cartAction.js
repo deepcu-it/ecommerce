@@ -2,7 +2,7 @@ import { ADD_TO_CART, REMOVE_FROM_CART } from "../consents/cartConsents";
 import axios from "axios";
 
 // Centralized API base URL
-const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
+const baseURL = "https://sts3-ecommerce-store-backend-api.mdbgo.io/api/v1";
 
 // Add to Cart
 export const addToCart = (id, quantity) => async (dispatch, getState) => {

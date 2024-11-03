@@ -26,7 +26,7 @@ import {
   DELETE_USER_FAIL,
 } from "../consents/userConsent.js";
 
-const baseURL = "https://ecommerce-bytb.onrender.com/api/v1";
+const baseURL = "https://sts3-ecommerce-store-backend-api.mdbgo.io/api/v1";
 
 // Helper function to get the token from localStorage
 const getToken = () => localStorage.getItem("token");
